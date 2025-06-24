@@ -400,7 +400,7 @@ end
 
 local directoryType = gt.build(gt.union(Directory.type:type(), AsPathType:type()))
 
-type DirEntry = {
+export type DirEntry = {
 	name: string,
 	file: File?,
 	dir: Directory?,
@@ -452,7 +452,7 @@ function pathfs.getEntries(directory: typeof(directoryType:type())): { DirEntry 
 		table.insert(entries, {
 			name = entryName,
 			file = pathfs.findFile(path),
-			directory = pathfs.findDir(path),
+			dir = pathfs.findDir(path),
 			path = path,
 		})
 	end
