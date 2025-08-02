@@ -1,9 +1,9 @@
 # lune-pathfs
 luau-path + @lune/fs and some utilities
 
-## v0.6.0-rc.4
-### Added
-- Add `pathfs.writeFileAll`
+## v0.6.0-rc.8
+### Changes
+- Reimplement `pathfs.normalize` and now works properly ([#26](https://github.com/jiwonz/lune-pathfs/pull/26))
 
 ## Features
 - Includes typed `luau-path` utility (now fully typed)
@@ -33,6 +33,7 @@ print(fs.readFile(path))
 
 -- Some useful utilities
 pathfs.script()
+pathfs.normalize("./dirty/./path")
 pathfs.absolute("relative/file/path")
 pathfs.withoutCurDir("./to/remove/curdir/the/dot")
 pathfs.diff("target", "base")
