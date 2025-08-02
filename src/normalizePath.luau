@@ -1,5 +1,5 @@
 local types = require("./types")
-local luauPath = require("../../luau_packages/luau_path")
+local luauPath = require("../luau_packages/luau_path")
 local Path = luauPath.Path
 
 type Component = types.Component

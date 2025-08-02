@@ -8,7 +8,7 @@ includes = ["README.md", "pesde.toml", "src/**", "LICENSE"]
 
 [target]
 environment = "lune"
-lib = "src/lib/init.luau"
+lib = "src/lib.luau"
 
 [indices]
 default = "https://github.com/daimond113/pesde-index"

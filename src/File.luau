@@ -1,8 +1,8 @@
-local luauPath = require("../../luau_packages/luau_path")
+local luauPath = require("../luau_packages/luau_path")
 local Path = luauPath.Path
 local fs = require("./fs")
 local types = require("./types")
-local gt = require("../../lune_packages/greentea")
+local gt = require("../lune_packages/greentea")
 
 local PathType = types.PathType
 local AsPathType = types.AsPathType

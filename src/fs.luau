@@ -1,5 +1,5 @@
 local luneFileSystem = require("@lune/fs")
-local gt = require("../../lune_packages/greentea")
+local gt = require("../lune_packages/greentea")
 local vfs = require("./vfs")
 local asPathToString = vfs.asPathToString
 local types = require("./types")
