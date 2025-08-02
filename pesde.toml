@@ -14,7 +14,7 @@ lib = "src/lib.luau"
 default = "https://github.com/daimond113/pesde-index"
 
 [engines]
-lune = "^0.8.9"
+lune = "^0.9.4"
 pesde = "^0.7.0-rc.1"
 
 [dependencies]
@@ -23,7 +23,3 @@ greentea = { name = "corecii/greentea", version = "^0.4.11" }
 
 [dev_dependencies]
 frktest = { name = "itsfrank/frktest", version = "^0.0.2" }
-luau_check = { name = "jiwonz/luau_check", version = "^0.3.13" }
-luau_lsp = { name = "pesde/luau_lsp", version = "^1.48.0" }
-selene = { name = "pesde/selene", version = "^0.28.0" }
-stylua = { name = "pesde/stylua", version = "^2.1.0" }
