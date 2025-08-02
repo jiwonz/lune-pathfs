@@ -3,6 +3,7 @@ local AsPathType = types.AsPathType
 local luauPath = require("../../luau_packages/luau_path")
 local Path = luauPath.Path
 local process = require("@lune/process")
+local normalizePath = require("./normalizePath")
 
 type Path = luauPath.Path
 type AsPath = luauPath.AsPath
@@ -11,21 +12,7 @@ local vfs = {}
 
 local currentDir: Path?
 
---[=[
-	Normalizes the given path.
-
-	### Example
-	```lua
-	local path = vfs.normalizePath("path/to/file")
-	```
-]=]
-function vfs.normalizePath(path: AsPath): Path
-	-- selene: allow(shadowing)
-	local path = Path.from(path)
-	return Path.from(path:components())
-end
-
-local cwd = vfs.normalizePath(Path.from(process.cwd))
+local cwd = normalizePath(process.cwd)
 
 function vfs.createPath(path: AsPath): Path
 	-- selene: allow(shadowing)
@@ -58,7 +45,7 @@ function vfs.setCurrentDir(path: AsPath)
 		error("Current path must be a relative path")
 	end
 	currentDir = newCurrentDir
-	cwd = vfs.normalizePath(Path.from(process.cwd):join(newCurrentDir))
+	cwd = normalizePath(Path.from(process.cwd):join(newCurrentDir))
 end
 
 function vfs.cwd(): Path
