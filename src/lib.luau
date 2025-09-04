@@ -2,10 +2,10 @@ local process = require("@lune/process")
 local pathSeparator = process.os == "windows" and "\\" or "/"
 -- selene: allow(global_usage)
 _G.SYS_PATH_SEPARATOR = pathSeparator
-local luauPath = require("../luau_packages/luau_path")
+local luauPath = require("@luauPackages/luau_path")
 local Path = luauPath.Path
 local fs = require("./fs")
-local gt = require("../lune_packages/greentea")
+local gt = require("@luauPackages/greentea")
 local types = require("./types")
 local vfs = require("./vfs")
 local createPath = vfs.createPath

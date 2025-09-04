@@ -1,7 +1,9 @@
 {
   "aliases": {
     "frktest": "lune_packages/.pesde/itsfrank+frktest/0.0.2/frktest/src/",
-    "lune": "~/.lune/.typedefs/0.8.9/",
+    "lune": "~/.lune/.typedefs/0.10.2/",
+	"luauPackages": "./luau_packages/",
+	"lunePackages": "./lune_packages/",
     "tests": "tests/"
   },
   "languageMode": "strict",
