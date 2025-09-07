@@ -1,0 +1,7 @@
+[settings]
+experimental = true
+
+[tools]
+"github:JohnnyMorganz/StyLua" = "latest"
+"github:JohnnyMorganz/luau-lsp" = "latest"
+"github:Kampfkarren/selene" = "latest"
