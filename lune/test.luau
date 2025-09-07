@@ -4,7 +4,7 @@ local function loadTests()
 end
 
 local function runTests()
-	local frktest = require("@frktest/")
+	local frktest = require("@frktest/frktest")
 	local lune_console_reporter = require("@frktest/reporters/lune_console_reporter")
 
 	lune_console_reporter.init()
