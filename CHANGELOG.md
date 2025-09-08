@@ -10,5 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Support Lune 0.10 (May not work anymore from previous versions) ([#33](https://github.com/jiwonz/lune-pathfs/pull/33))
+- Rename `File`/`Directory` to `FilePath`/`DirectoryPath` ([#34](https://github.com/jiwonz/lune-pathfs/pull/34))
 
 [unreleased]: https://github.com/jiwonz/lune-pathfs/compare/main...HEAD
