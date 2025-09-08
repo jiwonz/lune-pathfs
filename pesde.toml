@@ -14,12 +14,12 @@ lib = "src/lib.luau"
 default = "https://github.com/pesde-pkg/index"
 
 [engines]
-lune = "^0.10.0"
-pesde = "^0.7.0"
+lune = "^0.10.2"
+pesde = "^0.7.1"
 
 [dependencies]
 luau_path = { name = "jiwonz/luau_path", version = "^0.2.0", target = "luau" }
 greentea = { name = "jiwonz/greentea_luau", version = "^0.2.0", target = "luau" }
 
 [dev_dependencies]
-frktest = { name = "itsfrank/frktest", version = "^0.0.2" }
+frktest = { name = "itsfrank/frktest", version = "^0.0.4" }
