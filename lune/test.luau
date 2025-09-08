@@ -4,10 +4,9 @@ local function loadTests()
 end
 
 local function runTests()
-	local frktest = require("@frktest/frktest")
-	local lune_console_reporter = require("@frktest/reporters/lune_console_reporter")
+	local frktest = require("../luau_packages/frktest")
 
-	lune_console_reporter.init()
+	frktest.reporters.console_reporter.init()
 	local success = frktest.run()
 	if not success then
 		require("@lune/process").exit(1)

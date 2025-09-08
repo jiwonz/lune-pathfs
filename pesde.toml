@@ -22,4 +22,4 @@ luau_path = { name = "jiwonz/luau_path", version = "^0.2.0", target = "luau" }
 greentea = { name = "jiwonz/greentea_luau", version = "^0.2.0", target = "luau" }
 
 [dev_dependencies]
-frktest = { name = "itsfrank/frktest", version = "^0.0.4" }
+frktest = { name = "itsfrank/frktest", version = "^0.0.4", target = "luau" }
