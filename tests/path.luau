@@ -1,4 +1,4 @@
-local frktest = require("@frktest/")
+local frktest = require("@frktest/frktest")
 local test = frktest.test
 local check = frktest.assert.check
 local pathfs = require("../src/lib")
