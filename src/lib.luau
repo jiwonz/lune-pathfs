@@ -11,13 +11,13 @@ local vfs = require("./vfs")
 local createPath = vfs.createPath
 local normalizePath = require("./normalizePath")
 local cwd = vfs.cwd
-local Directory = require("./Directory")
+local DirectoryPath = require("./DirectoryPath")
 local luneFileSystem = require("@lune/fs")
-local File = require("./File")
+local FilePath = require("./FilePath")
 local task = require("@lune/task")
 
-export type Directory = Directory.Directory
-export type File = File.File
+export type DirectoryPath = DirectoryPath.DirectoryPath
+export type FilePath = FilePath.FilePath
 export type Metadata = luneFileSystem.Metadata
 export type MetadataKind = luneFileSystem.MetadataKind
 export type MetadataPermissions = luneFileSystem.MetadataPermissions
@@ -64,7 +64,7 @@ pathfs.fs = fs
 	dir:removeDir()
 	```
 ]=]
-pathfs.Directory = Directory
+pathfs.DirectoryPath = DirectoryPath
 --[=[
 	@within pathfs
 
@@ -76,7 +76,7 @@ pathfs.Directory = Directory
 	file:writeFile("content")
 	```
 ]=]
-pathfs.File = File
+pathfs.FilePath = FilePath
 --[=[
 	@within pathfs
 
@@ -359,15 +359,13 @@ end
 	@param filePath -- The path to the file, of type AsPathType.
 	@return File? -- A File object if the file exists, otherwise nil.
 ]=]
-function pathfs.findFile(filePath: typeof(AsPathType:type())): File?
+function pathfs.findFile(filePath: typeof(AsPathType:type())): FilePath?
 	AsPathType:assert(filePath)
 
 	-- selene: allow(shadowing)
 	local dirPath = createPath(filePath)
 	if fs.isFile(dirPath) then
-		local file = File.fromExisting(dirPath)
-
-		File.type:assert(file)
+		local file = FilePath.fromExisting(dirPath)
 
 		return file
 	end
@@ -382,15 +380,13 @@ end
 	@param dirPath -- The path to the directory, of type AsPathType.
 	@return dir -- A Directory object if the directory exists, otherwise nil.
 ]=]
-function pathfs.findDir(dirPath: typeof(AsPathType:type())): Directory?
+function pathfs.findDir(dirPath: typeof(AsPathType:type())): DirectoryPath?
 	AsPathType:assert(dirPath)
 
 	-- selene: allow(shadowing)
 	local dirPath = createPath(dirPath)
 	if fs.isDir(dirPath) then
-		local dir = Directory.fromExisting(dirPath)
-
-		Directory.type:assert(dir)
+		local dir = DirectoryPath.fromExisting(dirPath)
 
 		return dir
 	end
@@ -398,12 +394,15 @@ function pathfs.findDir(dirPath: typeof(AsPathType:type())): Directory?
 	return
 end
 
-local directoryType = gt.build(gt.union(Directory.type:type(), AsPathType:type()))
+local directoryType = gt.build(gt.union(
+	gt.custom(DirectoryPath.is, "DirectoryPath"),
+	AsPathType:type()
+))
 
 export type DirEntry = {
 	name: string,
-	file: File?,
-	dir: Directory?,
+	file: FilePath?,
+	dir: DirectoryPath?,
 	path: Path,
 }
 
@@ -412,8 +411,8 @@ local function hashDirEntry(entry: DirEntry): string
 end
 
 local function directoryToPath(dir: typeof(directoryType:type())): typeof(PathType:type())
-	local path: typeof(PathType:type()) = if Directory.is(dir)
-		then (dir :: Directory).path
+	local path: typeof(PathType:type()) = if DirectoryPath.is(dir)
+		then (dir :: DirectoryPath).path
 		else createPath(dir :: typeof(AsPathType:type()))
 
 	if not fs.isDir(path) then
@@ -766,13 +765,16 @@ function pathfs.watchDescendantEntryRemoved(
 	return watchEntryRemoved(pathfs.getDescendantEntries, directory, onRemoved)
 end
 
-local FileOrAsPathType = gt.build(gt.union(File.type:type(), AsPathType:type()))
+local FileOrAsPathType = gt.build(gt.union(
+	gt.custom(FilePath.is, "FilePath"),
+	AsPathType:type()
+))
 function pathfs.writeFileAll(fileOrPath: typeof(FileOrAsPathType:type()), contents: typeof(ContentsType:type()))
 	FileOrAsPathType:assert(fileOrPath)
 	ContentsType:assert(contents)
 
 	-- selene: allow(shadowing)
-	local path = createPath(if File.is(fileOrPath) then (fileOrPath :: File).path else fileOrPath :: AsPath)
+	local path = createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
 	local parent = path:parent()
 	if parent then
 		fs.writeDir(parent)
