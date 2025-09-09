@@ -5,7 +5,8 @@
 <hr />
 
 <div align="center">
-	<a href="https://github.com/seaofvoices/luau-path">luau-path</a> + <a href="https://lune-org.github.io/docs/api-reference/fs/">@lune/fs</a> with some utilities
+	<p><a href="https://github.com/seaofvoices/luau-path">luau-path</a> + <a href="https://lune-org.github.io/docs/api-reference/fs/">@lune/fs</a> with some utilities</p>
+	<a href="https://jiwonz.github.io/lune-pathfs/">View docs →</a>
 </div>
 
 ## Features
