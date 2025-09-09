@@ -17,7 +17,7 @@
 - Features useful path and fs related utilities (such as `watchFile`, `Directory`, `diff` and more!)
 
 ## Installation
-Install via pesde
+Install via [pesde](https://pesde.dev/packages/jiwonz/pathfs)
 ```sh
 pesde add jiwonz/pathfs -t lune
 ```
