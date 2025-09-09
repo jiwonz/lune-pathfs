@@ -33,11 +33,13 @@ local DirectoryPath = {} :: DirectoryPathImpl
 DirectoryPath.__index = DirectoryPath
 
 function DirectoryPath.__tostring(self)
+	assert(PathType(self.path))
+
 	return `DirectoryPath<{self.path}>`
 end
 
 function DirectoryPath.new(dirPath)
-	AsPathType:assert(dirPath)
+	assert(AsPathType(dirPath))
 
 	return setmetatable({
 		path = Path.from(dirPath),
@@ -45,7 +47,7 @@ function DirectoryPath.new(dirPath)
 end
 
 function DirectoryPath.fromExisting(dirPath)
-	AsPathType:assert(dirPath)
+	assert(AsPathType(dirPath))
 
 	if not fs.isDir(dirPath) then
 		error(`There is no directory at that path({dirPath})`)
@@ -57,7 +59,7 @@ function DirectoryPath.fromExisting(dirPath)
 end
 
 function DirectoryPath.withDirWritten(self, allowOverwrite)
-	optionalBooleanType:assert(allowOverwrite)
+	assert(optionalBooleanType(allowOverwrite))
 
 	if self:isDir() then
 		if allowOverwrite then
@@ -79,11 +81,7 @@ function DirectoryPath.is(value)
 end
 
 function DirectoryPath.isDir(self)
-	local isDir = fs.isDir(self.path)
-
-	booleanType:assert(isDir)
-
-	return isDir
+	return fs.isDir(self.path)
 end
 
 function DirectoryPath.readDir(self)

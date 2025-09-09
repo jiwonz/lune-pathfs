@@ -138,25 +138,20 @@ local optionalNumberType = gt.build(gt.opt(gt.number()))
 	* script path found in `debug.info(level)` is not resolvable.
 ]=]
 function pathfs.script(level: typeof(optionalNumberType:type())): typeof(PathType:type())
-	optionalNumberType:assert(level)
+	assert(optionalNumberType(level))
 
 	local path = string.match(debug.info(level or 2, "s"), '%[string "([^"]*)"%]')
 	if path then
 		local luauOne = path .. ".luau"
 		local luaOne = path .. ".lua"
 
-		local result: typeof(PathType:type())
 		if fs.isFile(luauOne) then
-			result = Path.from(luauOne)
+			return Path.from(luauOne)
 		elseif fs.isFile(luaOne) then
-			result = Path.from(luaOne)
+			return Path.from(luaOne)
 		elseif fs.isFile(path) then
-			result = Path.from(path)
+			return Path.from(path)
 		end
-
-		PathType:assert(result)
-
-		return result
 	end
 
 	error("Failed to get script path")
@@ -168,7 +163,7 @@ end
 	Gets absolute path of given path just by joining the `pathfs.cwd` and the path.
 ]=]
 function pathfs.absolute(path: typeof(AsPathType:type())): typeof(PathType:type())
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	-- selene: allow(shadowing)
 	local path = createPath(path)
@@ -177,11 +172,7 @@ function pathfs.absolute(path: typeof(AsPathType:type())): typeof(PathType:type(
 		return path
 	end
 
-	local absolutePath = normalizePath(cwd():join(path))
-
-	PathType:assert(absolutePath)
-
-	return absolutePath
+	return normalizePath(cwd():join(path))
 end
 
 --[=[
@@ -190,7 +181,7 @@ end
 	Gets a path without the current directory component.
 ]=]
 function pathfs.withoutCurDir(path: typeof(AsPathType:type())): typeof(PathType:type())
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	-- selene: allow(shadowing)
 	local path = createPath(path)
@@ -199,8 +190,6 @@ function pathfs.withoutCurDir(path: typeof(AsPathType:type())): typeof(PathType:
 	if firstComponent and firstComponent.type == "curDir" then
 		return createPath(components)
 	end
-
-	PathType:assert(path)
 
 	return path
 end
@@ -219,9 +208,9 @@ function pathfs.diff(
 	base: typeof(AsPathType:type()),
 	separator: typeof(optionalStringType:type())
 ): typeof(optionalPathType:type())
-	AsPathType:assert(target)
-	AsPathType:assert(base)
-	optionalStringType:assert(separator)
+	assert(AsPathType(target))
+	assert(AsPathType(base))
+	assert(optionalStringType(separator))
 
 	separator = separator or pathfs.pathSeparator
 	-- selene: allow(shadowing)
@@ -268,11 +257,7 @@ function pathfs.diff(
 		for _, comp in comps do
 			table.insert(strComps, comp:toString())
 		end
-		local result = Path.from(table.concat(strComps, separator))
-
-		optionalPathType:assert(result)
-
-		return result
+		return Path.from(table.concat(strComps, separator))
 	end
 end
 
@@ -282,14 +267,12 @@ end
 	Returns the canonical, absolute form of a path with all intermediate components normalized and symbolic links resolved.
 ]=]
 function pathfs.canonicalize(path: typeof(AsPathType:type())): typeof(PathType:type())
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	-- selene: allow(shadowing)
 	local path = createPath(path)
 	local absolutePath = pathfs.absolute(path)
 	if fs.isFile(absolutePath) or fs.isDir(absolutePath) then
-		PathType:assert(absolutePath)
-
 		return absolutePath
 	end
 
@@ -310,8 +293,8 @@ function pathfs.fromDir(
 	path: typeof(AsPathType:type()),
 	relative: typeof(optionalBooleanType:type())
 ): typeof(PathType:type())
-	AsPathType:assert(path)
-	optionalBooleanType:assert(relative)
+	assert(AsPathType(path))
+	assert(optionalBooleanType(relative))
 
 	-- selene: allow(shadowing)
 	local path = createPath(path)
@@ -319,11 +302,7 @@ function pathfs.fromDir(
 	local resolved = if relative == true then currentScriptPath else pathfs.canonicalize(currentScriptPath)
 	local parent = resolved:parent()
 	if parent then
-		local result = parent:join(path)
-
-		PathType:assert(result)
-
-		return result
+		return parent:join(path)
 	end
 	error("Failed to perform 'fromDir'. parent does not exist in the script path")
 end
@@ -339,14 +318,12 @@ end
 	* Current script path's parent path does not exist.
 ]=]
 function pathfs.getDir(relative: typeof(optionalBooleanType:type())): typeof(PathType:type())
-	optionalBooleanType:assert(relative)
+	assert(optionalBooleanType(relative))
 
 	local currentScriptPath = pathfs.script(3)
 	local resolved = if relative == true then currentScriptPath else pathfs.canonicalize(currentScriptPath)
 	local parent = resolved:parent()
 	if parent then
-		PathType:assert(parent)
-
 		return parent
 	end
 	error("Failed to get dir path. parent does not exist in the script path")
@@ -360,14 +337,12 @@ end
 	@return File? -- A File object if the file exists, otherwise nil.
 ]=]
 function pathfs.findFile(filePath: typeof(AsPathType:type())): FilePath?
-	AsPathType:assert(filePath)
+	assert(AsPathType(filePath))
 
 	-- selene: allow(shadowing)
 	local dirPath = createPath(filePath)
 	if fs.isFile(dirPath) then
-		local file = FilePath.fromExisting(dirPath)
-
-		return file
+		return FilePath.fromExisting(dirPath)
 	end
 
 	return
@@ -381,14 +356,12 @@ end
 	@return dir -- A Directory object if the directory exists, otherwise nil.
 ]=]
 function pathfs.findDir(dirPath: typeof(AsPathType:type())): DirectoryPath?
-	AsPathType:assert(dirPath)
+	assert(AsPathType(dirPath))
 
 	-- selene: allow(shadowing)
 	local dirPath = createPath(dirPath)
 	if fs.isDir(dirPath) then
-		local dir = DirectoryPath.fromExisting(dirPath)
-
-		return dir
+		return DirectoryPath.fromExisting(dirPath)
 	end
 
 	return
@@ -440,7 +413,7 @@ end
 	@return entries -- A table containing the entries in the directory.
 ]=]
 function pathfs.getEntries(directory: typeof(directoryType:type())): { DirEntry }
-	directoryType:assert(directory)
+	assert(directoryType(directory))
 
 	-- selene: allow(shadowing)
 	local directory = directoryToPath(directory)
@@ -477,7 +450,7 @@ end
 	@return entries -- A table containing the entries in the directory.
 ]=]
 function pathfs.getDescendantEntries(directory: typeof(directoryType:type())): { DirEntry }
-	directoryType:assert(directory)
+	assert(directoryType(directory))
 
 	-- selene: allow(shadowing)
 	local directory = directoryToPath(directory)
@@ -551,8 +524,8 @@ function pathfs.watchDirectories(
 	directories: typeof(directoriesArrayType:type()),
 	onChanged: typeof(callbackType:type())
 ): thread
-	directoriesArrayType:assert(directories)
-	callbackType:assert(onChanged)
+	assert(directoriesArrayType(directories))
+	assert(callbackType(onChanged))
 
 	local paths = {}
 
@@ -581,8 +554,8 @@ end
 	```
 ]=]
 function pathfs.watchFile(fileName: typeof(AsPathType:type()), onChanged: typeof(callbackType:type())): thread
-	AsPathType:assert(fileName)
-	callbackType:assert(onChanged)
+	assert(AsPathType(fileName))
+	assert(callbackType(onChanged))
 
 	task.spawn(onChanged)
 	return task.spawn(function()
@@ -606,8 +579,8 @@ local function watchEntryAdded(
 	directory: typeof(directoryType:type()),
 	onAdded: typeof(callbackType:type() :: (addedEntry: DirEntry) -> ())
 ): thread
-	directoryType:assert(directory)
-	callbackType:assert(onAdded)
+	assert(directoryType(directory))
+	assert(callbackType(onAdded))
 
 	local oldEntries: { [string]: DirEntry } = {}
 	for _, entry in getEntries(directory) do
@@ -688,8 +661,8 @@ local function watchEntryRemoved(
 	directory: typeof(directoryType:type()),
 	onRemoved: typeof(callbackType:type() :: (removedEntry: DirEntry) -> ())
 ): thread
-	directoryType:assert(directory)
-	callbackType:assert(onRemoved)
+	assert(directoryType(directory))
+	assert(callbackType(onRemoved))
 
 	local oldEntries: { [string]: DirEntry } = {}
 	for _, entry in getEntries(directory) do
@@ -770,8 +743,8 @@ local FileOrAsPathType = gt.build(gt.union(
 	AsPathType:type()
 ))
 function pathfs.writeFileAll(fileOrPath: typeof(FileOrAsPathType:type()), contents: typeof(ContentsType:type()))
-	FileOrAsPathType:assert(fileOrPath)
-	ContentsType:assert(contents)
+	assert(FileOrAsPathType(fileOrPath))
+	assert(ContentsType(contents))
 
 	-- selene: allow(shadowing)
 	local path = createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
@@ -793,8 +766,8 @@ local function observeEntry(
 	directory: typeof(directoryType:type()),
 	callback: typeof(callbackType:type() :: (entry: DirEntry) -> (() -> ())?)
 ): () -> ()
-	directoryType:assert(directory)
-	callbackType:assert(callback)
+	assert(directoryType(directory))
+	assert(callbackType(callback))
 
 	local entryValues: {
 		[string]: EntryValue?,
