@@ -238,4 +238,142 @@ return function()
 			check.is_true(normalizedPath:equal(path))
 		end)
 	end)
+
+	test.suite("pathfs serialization functions", function()
+		test.case("should serialize and deserialize JSON", function()
+			local testData = { name = "test", value = 42, nested = { array = {1, 2, 3} } }
+			local testPath = "temp-test.json"
+
+			-- Clean up first
+			pcall(function()
+				pathfs.fs.removeFile(testPath)
+			end)
+
+			-- Test serialization
+			pathfs.serializeFile(testData, testPath)
+			check.is_true(pathfs.fs.isFile(testPath))
+
+			-- Test deserialization
+			local deserializedData = pathfs.deserializeFile(testPath)
+			check.equal(deserializedData.name, testData.name)
+			check.equal(deserializedData.value, testData.value)
+			check.equal(#deserializedData.nested.array, 3)
+
+			-- Clean up
+			pathfs.fs.removeFile(testPath)
+		end)
+
+		test.case("should serialize and deserialize TOML", function()
+			local testData = { title = "Test Config", database = { server = "localhost", port = 5432 } }
+			local testPath = "temp-test.toml"
+
+			-- Clean up first
+			pcall(function()
+				pathfs.fs.removeFile(testPath)
+			end)
+
+			-- Test serialization
+			pathfs.serializeFile(testData, testPath)
+			check.is_true(pathfs.fs.isFile(testPath))
+
+			-- Test deserialization
+			local deserializedData = pathfs.deserializeFile(testPath)
+			check.equal(deserializedData.title, testData.title)
+			check.equal(deserializedData.database.server, testData.database.server)
+			check.equal(deserializedData.database.port, testData.database.port)
+
+			-- Clean up
+			pathfs.fs.removeFile(testPath)
+		end)
+
+		test.case("should serialize and deserialize YAML", function()
+			local testData = { name = "yaml-test", items = {"item1", "item2", "item3"} }
+			local testPath = "temp-test.yaml"
+
+			-- Clean up first
+			pcall(function()
+				pathfs.fs.removeFile(testPath)
+			end)
+
+			-- Test serialization
+			pathfs.serializeFile(testData, testPath)
+			check.is_true(pathfs.fs.isFile(testPath))
+
+			-- Test deserialization
+			local deserializedData = pathfs.deserializeFile(testPath)
+			check.equal(deserializedData.name, testData.name)
+			check.equal(#deserializedData.items, 3)
+			check.equal(deserializedData.items[1], "item1")
+
+			-- Clean up
+			pathfs.fs.removeFile(testPath)
+		end)
+
+		test.case("should work with .yml extension", function()
+			local testData = { test = "yml extension" }
+			local testPath = "temp-test.yml"
+
+			-- Clean up first
+			pcall(function()
+				pathfs.fs.removeFile(testPath)
+			end)
+
+			-- Test serialization
+			pathfs.serializeFile(testData, testPath)
+			check.is_true(pathfs.fs.isFile(testPath))
+
+			-- Test deserialization
+			local deserializedData = pathfs.deserializeFile(testPath)
+			check.equal(deserializedData.test, testData.test)
+
+			-- Clean up
+			pathfs.fs.removeFile(testPath)
+		end)
+
+		test.case("should work with FilePath objects", function()
+			local testData = { filePath = "test" }
+			local testPath = pathfs.Path.from("temp-test-filepath.json")
+
+			-- Clean up first
+			pcall(function()
+				pathfs.fs.removeFile(testPath)
+			end)
+
+			-- Test serialization with Path object
+			pathfs.serializeFile(testData, testPath)
+			check.is_true(pathfs.fs.isFile(testPath))
+
+			-- Test deserialization with Path object
+			local deserializedData = pathfs.deserializeFile(testPath)
+			check.equal(deserializedData.filePath, testData.filePath)
+
+			-- Clean up
+			pathfs.fs.removeFile(testPath)
+		end)
+
+		test.case("should throw error for unsupported file extension", function()
+			local testData = { test = "data" }
+			local testPath = "temp-test.unsupported"
+
+			local success = pcall(function()
+				pathfs.serializeFile(testData, testPath)
+			end)
+			check.is_false(success)
+		end)
+
+		test.case("should throw error for non-existent file in deserialize", function()
+			local success = pcall(function()
+				pathfs.deserializeFile("non-existent-file.json")
+			end)
+			check.is_false(success)
+		end)
+
+		test.case("should export serializeFile function", function()
+			check.is_true(type(pathfs.serializeFile) == "function")
+		end)
+
+		test.case("should export deserializeFile function", function()
+			check.is_true(type(pathfs.deserializeFile) == "function")
+		end)
+	end)
 end

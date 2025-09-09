@@ -15,6 +15,7 @@ local DirectoryPath = require("./DirectoryPath")
 local luneFileSystem = require("@lune/fs")
 local FilePath = require("./FilePath")
 local task = require("@lune/task")
+local serde = require("@lune/serde")
 
 export type DirectoryPath = DirectoryPath.DirectoryPath
 export type FilePath = FilePath.FilePath
@@ -758,12 +759,17 @@ local FileOrAsPathType = gt.build(gt.union(
 	gt.custom(FilePath.is, "FilePath"),
 	AsPathType:type()
 ))
+
+local function fileOrAsPathToPath(fileOrPath: typeof(FileOrAsPathType:type())): Path
+	return createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
+end
+
 function pathfs.writeFileAll(fileOrPath: typeof(FileOrAsPathType:type()), contents: typeof(ContentsType:type()))
 	assert(FileOrAsPathType(fileOrPath))
 	assert(ContentsType(contents))
 
 	-- selene: allow(shadowing)
-	local path = createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
+	local path = fileOrAsPathToPath(fileOrPath)
 	local parent = path:parent()
 	if parent then
 		fs.writeDir(parent)
@@ -942,6 +948,82 @@ function pathfs.observeDescendantEntry(
 	warn("pathfs.observeDescendantEntry is deprecated and will be removed in future releases")
 
 	return observeEntry(pathfs.getDescendantEntries, directory, callback)
+end
+
+--[=[
+	@within pathfs
+
+	Serializes a value to a file based on the file extension.
+	Supports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.
+
+	### Example
+	```lua
+	local data = { name = "example", value = 42 }
+	pathfs.serializeFile(data, "config.json")
+	pathfs.serializeFile(data, "config.toml")
+	pathfs.serializeFile(data, "config.yaml")
+	```
+
+	@param value -- The value to serialize
+	@param fileOrPath -- The file path or FilePath object
+]=]
+function pathfs.serializeFile(value: any, fileOrPath: typeof(FileOrAsPathType:type()))
+	assert(FileOrAsPathType(fileOrPath))
+
+	local path = fileOrAsPathToPath(fileOrPath)
+	local extension = string.lower(path:extension() or "")
+
+	local content: string
+	if extension == "json" then
+		content = serde.encode("json", value)
+	elseif extension == "toml" then
+		content = serde.encode("toml", value)
+	elseif extension == "yaml" or extension == "yml" then
+		content = serde.encode("yaml", value)
+	else
+		error(`Unsupported file format: {extension}. Supported formats are: json, toml, yaml, yml`)
+	end
+
+	fs.writeFile(path, content)
+end
+
+--[=[
+	@within pathfs
+
+	Deserializes a file based on the file extension.
+	Supports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.
+
+	### Example
+	```lua
+	local config = pathfs.deserializeFile("config.json")
+	local settings = pathfs.deserializeFile("settings.toml")
+	local data = pathfs.deserializeFile("data.yaml")
+	```
+
+	@param fileOrPath -- The file path or FilePath object
+	@return value -- The deserialized value
+]=]
+function pathfs.deserializeFile(fileOrPath: typeof(FileOrAsPathType:type())): any
+	assert(FileOrAsPathType(fileOrPath))
+
+	local path = fileOrAsPathToPath(fileOrPath)
+
+	if not fs.isFile(path) then
+		error(`File does not exist: {path}`)
+	end
+
+	local content = fs.readFile(path)
+	local extension = string.lower(path:extension() or "")
+
+	if extension == "json" then
+		return serde.decode("json", content)
+	elseif extension == "toml" then
+		return serde.decode("toml", content)
+	elseif extension == "yaml" or extension == "yml" then
+		return serde.decode("yaml", content)
+	else
+		error(`Unsupported file format: {extension}. Supported formats are: json, toml, yaml, yml`)
+	end
 end
 
 return pathfs
