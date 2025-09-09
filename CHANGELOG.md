@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add a test for utilities ([#38](https://github.com/jiwonz/lune-pathfs/pull/38))
 - Add `serializeFile` and `deserializeFile` ([#39](https://github.com/jiwonz/lune-pathfs/pull/39))
+- Add moonwave docs ([#40](https://github.com/jiwonz/lune-pathfs/pull/40))
 
 ### Changed
 
