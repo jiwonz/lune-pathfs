@@ -48,6 +48,9 @@ local function peekable(iter: Components): PeekableComponents
 end
 
 --[=[
+	@within pathfs
+	@function normalize
+
 	Normalizes paths similarly to canonicalize, but without performing I/O.
 
 	This is like Python's `os.path.normpath`.
@@ -61,9 +64,12 @@ end
 	However, this does not resolve links.
 
 	### Example
-	```luau
-	local path = normalizePath("./path/to/./file") -- "path/to/file"
+	```lua
+	local path = pathfs.normalize("./path/to/./file") -- "path/to/file"
 	```
+
+	@param path AsPath -- The path to normalize
+	@return Path -- The normalized path
 ]=]
 return function(path: AsPath): Path
 	-- selene: allow(shadowing)

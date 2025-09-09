@@ -5,6 +5,7 @@ experimental = true
 "github:JohnnyMorganz/StyLua" = "latest"
 "github:JohnnyMorganz/luau-lsp" = "latest"
 "github:Kampfkarren/selene" = "latest"
+node = "18"
 
 [tasks.test]
 description = "Test pathfs"

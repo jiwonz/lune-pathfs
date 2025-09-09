@@ -1,0 +1,24 @@
+title = "pathfs"
+classOrder = [
+	"pathfs",
+]
+
+[docusaurus]
+projectName = "pathfs"
+
+[home]
+enabled = true
+includeReadme = false
+bannerImage = "https://github.com/user-attachments/assets/4fb6f4ac-fbb6-4ba1-8162-76285c5f6088"
+
+[[home.features]]
+title = "path + fs"
+description = "Combines the functionality of `@lune/path` and `@lune/fs` into a single, easy-to-use package."
+
+[[home.features]]
+title = "compatible"
+description = "Almost non-breaking changes from `@lune/fs` and `@lune/path`."
+
+[[home.features]]
+title = "utilities"
+description = "Provides useful utilities for working with file and directory paths."
