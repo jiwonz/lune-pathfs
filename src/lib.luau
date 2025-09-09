@@ -614,6 +614,7 @@ end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Watch a directory for added entries.
 
@@ -631,11 +632,15 @@ function pathfs.watchEntryAdded(
 	directory: typeof(directoryType:type()),
 	onAdded: typeof(callbackType:type() :: (addedEntry: DirEntry) -> ())
 ): thread
+	-- selene: allow(undefined_variable)
+	warn("pathfs.watchEntryAdded is deprecated and will be removed in future releases")
+
 	return watchEntryAdded(pathfs.getEntries, directory, onAdded)
 end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Watch a directory for added descendant entries.
 
@@ -653,6 +658,9 @@ function pathfs.watchDescendantEntryAdded(
 	directory: typeof(directoryType:type()),
 	onAdded: typeof(callbackType:type() :: (addedEntry: DirEntry) -> ())
 ): thread
+	-- selene: allow(undefined_variable)
+	warn("pathfs.watchDescendantEntryAdded is deprecated and will be removed in future releases")
+
 	return watchEntryAdded(pathfs.getDescendantEntries, directory, onAdded)
 end
 
@@ -696,6 +704,7 @@ end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Watch a directory for removed entries.
 
@@ -713,11 +722,15 @@ function pathfs.watchEntryRemoved(
 	directory: typeof(directoryType:type()),
 	onRemoved: typeof(callbackType:type() :: (removedEntry: DirEntry) -> ())
 ): thread
+	-- selene: allow(undefined_variable)
+	warn("pathfs.watchEntryRemoved is deprecated and will be removed in future releases")
+
 	return watchEntryRemoved(pathfs.getEntries, directory, onRemoved)
 end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Watch a directory for removed descendant entries.
 
@@ -735,6 +748,9 @@ function pathfs.watchDescendantEntryRemoved(
 	directory: typeof(directoryType:type()),
 	onRemoved: typeof(callbackType:type() :: (removedEntry: DirEntry) -> ())
 ): thread
+	-- selene: allow(undefined_variable)
+	warn("pathfs.watchDescendantEntryRemoved is deprecated and will be removed in future releases")
+
 	return watchEntryRemoved(pathfs.getDescendantEntries, directory, onRemoved)
 end
 
@@ -870,6 +886,7 @@ end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Observe a directory for changes.
 
@@ -891,11 +908,15 @@ function pathfs.observeEntry(
 	directory: typeof(directoryType:type()),
 	callback: typeof(callbackType:type() :: (entry: DirEntry) -> (() -> ())?)
 ): () -> ()
+	-- selene: allow(undefined_variable)
+	warn("pathfs.observeEntry is deprecated and will be removed in future releases")
+
 	return observeEntry(pathfs.getEntries, directory, callback)
 end
 
 --[=[
 	@within pathfs
+	@deprecated unreleased
 
 	Observe a directory for changes in its descendants.
 
@@ -917,6 +938,9 @@ function pathfs.observeDescendantEntry(
 	directory: typeof(directoryType:type()),
 	callback: typeof(callbackType:type() :: (entry: DirEntry) -> (() -> ())?)
 ): () -> ()
+	-- selene: allow(undefined_variable)
+	warn("pathfs.observeDescendantEntry is deprecated and will be removed in future releases")
+
 	return observeEntry(pathfs.getDescendantEntries, directory, callback)
 end
 
