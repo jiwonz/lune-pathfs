@@ -13,11 +13,11 @@ bannerImage = "https://github.com/user-attachments/assets/4fb6f4ac-fbb6-4ba1-816
 
 [[home.features]]
 title = "path + fs"
-description = "Combines the functionality of `@lune/path` and `@lune/fs` into a single, easy-to-use package."
+description = "Combines the functionality of `pathfs` and `@lune/fs` into a single, easy-to-use package."
 
 [[home.features]]
 title = "compatible"
-description = "Almost non-breaking changes from `@lune/fs` and `@lune/path`."
+description = "Almost non-breaking changes from `@lune/fs` and `pathfs`."
 
 [[home.features]]
 title = "utilities"
