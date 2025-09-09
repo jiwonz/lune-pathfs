@@ -5,3 +5,7 @@ experimental = true
 "github:JohnnyMorganz/StyLua" = "latest"
 "github:JohnnyMorganz/luau-lsp" = "latest"
 "github:Kampfkarren/selene" = "latest"
+
+[tasks.test]
+description = "Test pathfs"
+run = "lune run test"
