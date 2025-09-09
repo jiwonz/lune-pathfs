@@ -1,6 +1,7 @@
 local function loadTests()
 	require("@tests/path")()
 	require("@tests/fs")()
+	require("@tests/utilities")()
 end
 
 local function runTests()
