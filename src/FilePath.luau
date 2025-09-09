@@ -14,8 +14,8 @@ export type FilePath = typeof(setmetatable(
 	{} :: {
 		path: typeof(PathType:type()),
 	},
-	{} :: FilePathImpl)
-)
+	{} :: FilePathImpl
+))
 
 type FilePathImpl = {
 	__index: FilePathImpl,

@@ -344,10 +344,7 @@ function pathfs.findDir(dirPath: typeof(AsPathType:type())): DirectoryPath?
 	return
 end
 
-local directoryType = gt.build(gt.union(
-	gt.custom(DirectoryPath.is, "DirectoryPath"),
-	AsPathType:type()
-))
+local directoryType = gt.build(gt.union(gt.custom(DirectoryPath.is, "DirectoryPath"), AsPathType:type()))
 
 --[=[
 	@within pathfs
@@ -741,10 +738,7 @@ function pathfs.watchDescendantEntryRemoved(
 	return watchEntryRemoved(pathfs.getDescendantEntries, directory, onRemoved)
 end
 
-local FileOrAsPathType = gt.build(gt.union(
-	gt.custom(FilePath.is, "FilePath"),
-	AsPathType:type()
-))
+local FileOrAsPathType = gt.build(gt.union(gt.custom(FilePath.is, "FilePath"), AsPathType:type()))
 
 local function fileOrAsPathToPath(fileOrPath: typeof(FileOrAsPathType:type())): Path
 	return createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
