@@ -5,7 +5,7 @@
 <hr />
 
 <div align="center">
-	luau-path + @lune/fs with some utilities
+	<a href="https://github.com/seaofvoices/luau-path">luau-path</a> + <a href="https://lune-org.github.io/docs/api-reference/fs/">@lune/fs</a> with some utilities
 </div>
 
 ## Features
