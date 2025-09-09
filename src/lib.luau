@@ -601,7 +601,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Watch a directory for added entries.
 
@@ -627,7 +627,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Watch a directory for added descendant entries.
 
@@ -691,7 +691,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Watch a directory for removed entries.
 
@@ -717,7 +717,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Watch a directory for removed descendant entries.
 
@@ -891,7 +891,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Observe a directory for changes.
 
@@ -921,7 +921,7 @@ end
 
 --[=[
 	@within pathfs
-	@deprecated unreleased
+	@deprecated v0.6.0
 
 	Observe a directory for changes in its descendants.
 
