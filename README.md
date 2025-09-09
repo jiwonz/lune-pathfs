@@ -57,7 +57,7 @@ pathfs.writeFileAll("a/b/c/d/lol", "hi")
 - [ffrostfall/lunePackages](https://github.com/ffrostfall/lunePackages/blob/e6335a8c44957afbf1b00e3ecca37ac6a03af14d/watch/init.luau) - watch utilities base implementations
 
 ## TO-DOs
-- [ ] Docs
-- [ ] Add utils tests
-- [ ] Write CHANGELOG.md instead writing in README.md (maybe from v0.6.0)
+- [x] Docs
+- [x] Add utils tests
+- [x] Write CHANGELOG.md instead writing in README.md (maybe from v0.6.0)
 - [ ] (automated via GitHub action) Release with a bundled module
