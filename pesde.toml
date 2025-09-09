@@ -1,10 +1,10 @@
 name = "jiwonz/pathfs"
-version = "0.6.0-rc.8"
+version = "0.6.0"
 description = "luau-path + @lune/fs with some utilities"
-authors = ["jeparlefrancais <jeparlefrancais21@gmail.com>", "jiwonz <me@jiwonz.kr>"]
+authors = ["jiwonz <me@jiwonz.kr>", "jeparlefrancais <jeparlefrancais21@gmail.com>"]
 repository = "https://github.com/jiwonz/lune-pathfs"
 license = "MIT"
-includes = ["README.md", "pesde.toml", "src/**", "LICENSE"]
+includes = ["README.md", "pesde.toml", "src/**", "LICENSE", "docs/**"]
 
 [target]
 environment = "lune"

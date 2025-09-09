@@ -2,7 +2,7 @@
 # It is not intended for manual editing.
 format = 2
 name = "jiwonz/pathfs"
-version = "0.6.0-rc.8"
+version = "0.6.0"
 target = "lune"
 
 [graph."itsfrank/frktest@0.0.4 luau"]
