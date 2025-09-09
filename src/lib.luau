@@ -764,6 +764,19 @@ local function fileOrAsPathToPath(fileOrPath: typeof(FileOrAsPathType:type())): 
 	return createPath(if FilePath.is(fileOrPath) then (fileOrPath :: FilePath).path else fileOrPath :: AsPath)
 end
 
+--[=[
+	@within pathfs
+
+	Write a file, creating parent directories if they do not exist.
+
+	### Example
+	```lua
+	pathfs.writeFileAll("path/to/file", "content")
+	```
+
+	@param fileOrPath -- The file or path to write to, of type FilePath or AsPathType.
+	@param contents -- The contents to write to the file, of type string or table.
+]=]
 function pathfs.writeFileAll(fileOrPath: typeof(FileOrAsPathType:type()), contents: typeof(ContentsType:type()))
 	assert(FileOrAsPathType(fileOrPath))
 	assert(ContentsType(contents))
