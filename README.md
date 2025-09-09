@@ -1,5 +1,12 @@
-# lune-pathfs
-luau-path + @lune/fs with some utilities
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/4fb6f4ac-fbb6-4ba1-8162-76285c5f6088" alt="Ovjo" height="100" />
+</div>
+
+<hr />
+
+<div align="center">
+	luau-path + @lune/fs with some utilities
+</div>
 
 ## Features
 - Includes typed `luau-path` utility (now fully typed)
