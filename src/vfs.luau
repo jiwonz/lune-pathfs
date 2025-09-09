@@ -8,6 +8,10 @@ local normalizePath = require("./normalizePath")
 type Path = luauPath.Path
 type AsPath = luauPath.AsPath
 
+--[=[
+	@class vfs
+	@private
+]=]
 local vfs = {}
 
 local currentDir: Path?
@@ -31,6 +35,8 @@ function vfs.asPathToString(asPath: AsPath): string
 end
 
 --[=[
+	@within vfs
+
 	Sets the current directory path virtually.
 
 	An error will be thrown in the following situations:
@@ -48,6 +54,13 @@ function vfs.setCurrentDir(path: AsPath)
 	cwd = normalizePath(Path.from(process.cwd):join(newCurrentDir))
 end
 
+--[=[
+	@within pathfs
+
+	Returns the current working directory as an absolute path.
+
+	@return Path -- The current working directory
+]=]
 function vfs.cwd(): Path
 	return cwd
 end

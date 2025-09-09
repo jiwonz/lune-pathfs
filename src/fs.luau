@@ -10,11 +10,24 @@ local stringType = types.stringType
 local ContentsType = types.ContentsType
 local arrayOfStringType = types.arrayOfStringType
 
+--[=[
+	@class fs
+
+	`require("@lune/fs")` compat module
+
+	### Example
+	```lua
+	local fs = require("path/to/pathfs").fs
+
+	fs.readFile("path/to/file")
+	fs.writeFile("path/to/file", "content")
+	```
+]=]
 local fs = {}
 
 local overwriteOrOptionsType = gt.build(gt.any({ allowNil = true }) :: (luneFileSystem.WriteOptions | boolean)?)
 --[=[
-	@within FS
+	@within fs
 
 	Copies a file or directory recursively to a new path.
 
@@ -44,7 +57,7 @@ function fs.copy(
 end
 
 --[=[
-	@within FS
+	@within fs
 	@tag must_use
 
 	Checks if a given path is a directory.
@@ -54,7 +67,7 @@ end
 	* The current process lacks permissions to read at `path`.
 	* Some other I/O error occurred.
 
-	@param path -- The directory path to check
+	@param dirPath -- The directory path to check
 	@return boolean -- If the path is a directory or not
 ]=]
 function fs.isDir(dirPath: typeof(AsPathType:type())): typeof(booleanType:type())
@@ -64,7 +77,7 @@ function fs.isDir(dirPath: typeof(AsPathType:type())): typeof(booleanType:type()
 end
 
 --[=[
-	@within FS
+	@within fs
 	@tag must_use
 
 	Checks if a given path is a file.
@@ -74,7 +87,7 @@ end
 	* The current process lacks permissions to read at `path`.
 	* Some other I/O error occurred.
 
-	@param path -- The file path to check
+	@param filePath -- The file path to check
 	@return boolean -- If the path is a file or not
 ]=]
 function fs.isFile(filePath: typeof(AsPathType:type())): typeof(booleanType:type())
@@ -84,7 +97,7 @@ function fs.isFile(filePath: typeof(AsPathType:type())): typeof(booleanType:type
 end
 
 --[=[
-	@within FS
+	@within fs
 	@tag must_use
 
 	Gets metadata for the given path.
@@ -104,7 +117,7 @@ function fs.metadata(path: typeof(AsPathType:type())): luneFileSystem.Metadata
 end
 
 --[=[
-	@within FS
+	@within fs
 
 	Moves a file or directory to a new path.
 
@@ -135,7 +148,7 @@ function fs.move(
 end
 
 --[=[
-	@within FS
+	@within fs
 	@tag must_use
 
 	Reads entries in a directory at `path`.
@@ -146,7 +159,7 @@ end
 	* The current process lacks permissions to read the contents of the directory.
 	* Some other I/O error occurred.
 
-	@param path -- The directory path to search in
+	@param dirPath -- The directory path to search in
 	@return {string} -- A list of files & directories found
 ]=]
 function fs.readDir(dirPath: typeof(AsPathType:type())): typeof(arrayOfStringType:type())
@@ -156,7 +169,7 @@ function fs.readDir(dirPath: typeof(AsPathType:type())): typeof(arrayOfStringTyp
 end
 
 --[=[
-	@within FS
+	@within fs
 	@tag must_use
 
 	Reads a file at `path`.
@@ -167,7 +180,7 @@ end
 	* The current process lacks permissions to read the file.
 	* Some other I/O error occurred.
 
-	@param path -- The path to the file to read
+	@param filePath -- The path to the file to read
 	@return string -- The contents of the file
 ]=]
 function fs.readFile(filePath: typeof(AsPathType:type())): typeof(stringType:type())
@@ -177,7 +190,7 @@ function fs.readFile(filePath: typeof(AsPathType:type())): typeof(stringType:typ
 end
 
 --[=[
-	@within FS
+	@within fs
 
 	Removes a directory and all of its contents.
 
@@ -196,7 +209,7 @@ function fs.removeDir(path: typeof(AsPathType:type()))
 end
 
 --[=[
-	@within FS
+	@within fs
 
 	Removes a file.
 
@@ -215,7 +228,7 @@ function fs.removeFile(path: typeof(AsPathType:type()))
 end
 
 --[=[
-	@within FS
+	@within fs
 
 	Writes to a file at `path`.
 
@@ -236,7 +249,7 @@ function fs.writeFile(path: typeof(AsPathType:type()), contents: typeof(Contents
 end
 
 --[=[
-	@within FS
+	@within fs
 
 	Creates a directory and its parent directories if they are missing.
 

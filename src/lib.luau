@@ -35,50 +35,26 @@ local ContentsType = types.ContentsType
 --[=[
 	@class pathfs
 
-	luau-path + @lune/fs and some utilities
+	luau-path + @lune/fs with some utilities
 ]=]
 local pathfs = {}
-
 --[=[
+	@prop fs fs
 	@within pathfs
-
-	`require("@lune/fs")` compat module
-
-	### Example
-	```lua
-	local fs = require("path/to/pathfs").fs
-
-	fs.readFile("path/to/file")
-	fs.writeFile("path/to/file", "content")
-	...
-	```
 ]=]
 pathfs.fs = fs
 --[=[
+	@prop DirectoryPath DirectoryPath
 	@within pathfs
-
-	A `Directory` class
-
-	### Example
-	```lua
-	local dir = Directory.from("path/to/dir")
-	dir:removeDir()
-	```
 ]=]
 pathfs.DirectoryPath = DirectoryPath
 --[=[
+	@prop FilePath FilePath
 	@within pathfs
-
-	A `File` class
-
-	### Example
-	```lua
-	local file = File.from("path/to/file")
-	file:writeFile("content")
-	```
 ]=]
 pathfs.FilePath = FilePath
 --[=[
+	@prop pathSeparator string
 	@within pathfs
 
 	Current path separator
@@ -94,6 +70,8 @@ pathfs.FilePath = FilePath
 ]=]
 pathfs.pathSeparator = pathSeparator
 --[=[
+	@external Component https://github.com/seaofvoices/luau-path/blob/main/src/Component.luau
+	@prop Component Component
 	@within pathfs
 
 	A `Component` class exported from `luau-path`
@@ -108,6 +86,7 @@ pathfs.Component = getmetatable(Path.from("a"):components():collect()[1] :: any)
 pathfs.normalize = normalizePath
 pathfs.cwd = cwd
 --[=[
+	@prop Path Path
 	@within pathfs
 
 	A `Path` class exported from `luau-path`
@@ -335,7 +314,7 @@ end
 
 	Finds a file at the given file path.
 	@param filePath -- The path to the file, of type AsPathType.
-	@return File? -- A File object if the file exists, otherwise nil.
+	@return FilePath? -- A File object if the file exists, otherwise nil.
 ]=]
 function pathfs.findFile(filePath: typeof(AsPathType:type())): FilePath?
 	assert(AsPathType(filePath))
@@ -354,7 +333,7 @@ end
 
 	Finds a directory at the given directory path.
 	@param dirPath -- The path to the directory, of type AsPathType.
-	@return dir -- A Directory object if the directory exists, otherwise nil.
+	@return DirectoryPath? -- A Directory object if the directory exists, otherwise nil.
 ]=]
 function pathfs.findDir(dirPath: typeof(AsPathType:type())): DirectoryPath?
 	assert(AsPathType(dirPath))
@@ -373,6 +352,16 @@ local directoryType = gt.build(gt.union(
 	AsPathType:type()
 ))
 
+--[=[
+	@within pathfs
+	@interface DirEntry
+	.name string -- File name of this directory entry without any leading path component(s)
+	.file FilePath? -- File object if it exists
+	.dir DirectoryPath? -- Directory object if it exists
+	.path Path -- The full path of this directory entry
+
+	A directory entry object.
+]=]
 export type DirEntry = {
 	name: string,
 	file: FilePath?,
@@ -410,8 +399,8 @@ end
 	end
 	```
 
-	@param dir -- The directory to get entries from, of type Directory or AsPathType.
-	@return entries -- A table containing the entries in the directory.
+	@param directory -- The directory to get entries from, of type Directory or AsPathType.
+	@return { DirEntry } -- A table containing the entries in the directory.
 ]=]
 function pathfs.getEntries(directory: typeof(directoryType:type())): { DirEntry }
 	assert(directoryType(directory))
@@ -447,8 +436,8 @@ end
 	end
 	```
 
-	@param dir -- The directory to get entries from, of type Directory or AsPathType.
-	@return entries -- A table containing the entries in the directory.
+	@param directory -- The directory to get entries from, of type Directory or AsPathType.
+	@return { DirEntry } -- A table containing the entries in the directory.
 ]=]
 function pathfs.getDescendantEntries(directory: typeof(directoryType:type())): { DirEntry }
 	assert(directoryType(directory))
@@ -1014,7 +1003,7 @@ end
 	```
 
 	@param fileOrPath -- The file path or FilePath object
-	@return value -- The deserialized value
+	@return any -- The deserialized value
 ]=]
 function pathfs.deserializeFile(fileOrPath: typeof(FileOrAsPathType:type())): any
 	assert(FileOrAsPathType(fileOrPath))
