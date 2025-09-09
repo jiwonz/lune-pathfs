@@ -38,11 +38,13 @@ local FilePath = {} :: FilePathImpl
 FilePath.__index = FilePath
 
 function FilePath.__tostring(self)
+	assert(PathType(self.path))
+
 	return `FilePath<{self.path}>`
 end
 
 function FilePath.new(filePath)
-	AsPathType:assert(filePath)
+	assert(AsPathType(filePath))
 
 	return setmetatable({
 		path = Path.from(filePath),
@@ -50,7 +52,7 @@ function FilePath.new(filePath)
 end
 
 function FilePath.fromExisting(filePath)
-	AsPathType:assert(filePath)
+	assert(AsPathType(filePath))
 
 	if not fs.isFile(filePath) then
 		error(`There is no file at that path({filePath})`)
@@ -62,8 +64,8 @@ function FilePath.fromExisting(filePath)
 end
 
 function FilePath.withFileWritten(self, contents, allowOverwrite)
-	ContentsType:assert(contents)
-	optionalBooleanType:assert(allowOverwrite)
+	assert(ContentsType(contents))
+	assert(optionalBooleanType(allowOverwrite))
 
 	if self:isFile() then
 		if allowOverwrite then
@@ -85,24 +87,14 @@ function FilePath.is(value)
 end
 
 function FilePath.isFile(self)
-	local isFile = fs.isFile(self.path)
-
-	booleanType:assert(isFile)
-
-	return isFile
+	return fs.isFile(self.path)
 end
 
 function FilePath.readFile(self)
-	local contents = fs.readFile(self.path)
-
-	stringType:assert(contents)
-
-	return contents
+	return fs.readFile(self.path)
 end
 
 function FilePath.writeFile(self, contents)
-	ContentsType:assert(contents)
-
 	return fs.writeFile(self.path, contents)
 end
 

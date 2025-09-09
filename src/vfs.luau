@@ -38,7 +38,7 @@ end
 	* Given path is not a relative path.
 ]=]
 function vfs.setCurrentDir(path: AsPath)
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	local newCurrentDir: Path = Path.from(vfs.asPathToString(path))
 	if not newCurrentDir:isRelative() then

@@ -36,9 +36,9 @@ function fs.copy(
 	to: typeof(AsPathType:type()),
 	overwriteOrOptions: typeof(overwriteOrOptionsType:type())
 )
-	AsPathType:assert(from)
-	AsPathType:assert(to)
-	overwriteOrOptionsType:assert(overwriteOrOptions)
+	assert(AsPathType(from))
+	assert(AsPathType(to))
+	assert(overwriteOrOptionsType(overwriteOrOptions))
 
 	return luneFileSystem.copy(asPathToString(from), asPathToString(to), overwriteOrOptions)
 end
@@ -58,13 +58,9 @@ end
 	@return boolean -- If the path is a directory or not
 ]=]
 function fs.isDir(dirPath: typeof(AsPathType:type())): typeof(booleanType:type())
-	AsPathType:assert(dirPath)
+	assert(AsPathType(dirPath))
 
-	local isDir = luneFileSystem.isDir(asPathToString(dirPath))
-
-	booleanType:assert(isDir)
-
-	return isDir
+	return luneFileSystem.isDir(asPathToString(dirPath))
 end
 
 --[=[
@@ -82,13 +78,9 @@ end
 	@return boolean -- If the path is a file or not
 ]=]
 function fs.isFile(filePath: typeof(AsPathType:type())): typeof(booleanType:type())
-	AsPathType:assert(filePath)
+	assert(AsPathType(filePath))
 
-	local isFile = luneFileSystem.isFile(asPathToString(filePath))
-
-	booleanType:assert(isFile)
-
-	return isFile
+	return luneFileSystem.isFile(asPathToString(filePath))
 end
 
 --[=[
@@ -106,7 +98,7 @@ end
 	@return Metadata -- Metadata for the path
 ]=]
 function fs.metadata(path: typeof(AsPathType:type())): luneFileSystem.Metadata
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	return luneFileSystem.metadata(asPathToString(path))
 end
@@ -135,9 +127,9 @@ function fs.move(
 	to: typeof(AsPathType:type()),
 	overwriteOrOptions: typeof(overwriteOrOptionsType:type())
 )
-	AsPathType:assert(from)
-	AsPathType:assert(to)
-	overwriteOrOptionsType:assert(overwriteOrOptions)
+	assert(AsPathType(from))
+	assert(AsPathType(to))
+	assert(overwriteOrOptionsType(overwriteOrOptions))
 
 	return luneFileSystem.move(asPathToString(from), asPathToString(to), overwriteOrOptions)
 end
@@ -155,19 +147,12 @@ end
 	* Some other I/O error occurred.
 
 	@param path -- The directory path to search in
-	@return {Path} -- A list of files & directories found
+	@return {string} -- A list of files & directories found
 ]=]
 function fs.readDir(dirPath: typeof(AsPathType:type())): typeof(arrayOfStringType:type())
-	AsPathType:assert(dirPath)
+	assert(AsPathType(dirPath))
 
-	local dirs = luneFileSystem.readDir(asPathToString(dirPath))
-	for i, v in dirs do
-		dirs[i] = v
-	end
-
-	arrayOfStringType:assert(dirs)
-
-	return dirs
+	return luneFileSystem.readDir(asPathToString(dirPath))
 end
 
 --[=[
@@ -186,13 +171,9 @@ end
 	@return string -- The contents of the file
 ]=]
 function fs.readFile(filePath: typeof(AsPathType:type())): typeof(stringType:type())
-	AsPathType:assert(filePath)
+	assert(AsPathType(filePath))
 
-	local contents = luneFileSystem.readFile(asPathToString(filePath))
-
-	stringType:assert(contents)
-
-	return contents
+	return luneFileSystem.readFile(asPathToString(filePath))
 end
 
 --[=[
@@ -209,7 +190,7 @@ end
 	@param path -- The directory to remove
 ]=]
 function fs.removeDir(path: typeof(AsPathType:type()))
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	return luneFileSystem.removeDir(asPathToString(path))
 end
@@ -228,7 +209,7 @@ end
 	@param path -- The file to remove
 ]=]
 function fs.removeFile(path: typeof(AsPathType:type()))
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	return luneFileSystem.removeFile(asPathToString(path))
 end
@@ -248,8 +229,8 @@ end
 	@param contents -- The contents of the file
 ]=]
 function fs.writeFile(path: typeof(AsPathType:type()), contents: typeof(ContentsType:type()))
-	AsPathType:assert(path)
-	ContentsType:assert(contents)
+	assert(AsPathType(path))
+	assert(ContentsType(contents))
 
 	return luneFileSystem.writeFile(asPathToString(path), contents)
 end
@@ -268,7 +249,7 @@ end
 	@param path -- The directory to create
 ]=]
 function fs.writeDir(path: typeof(AsPathType:type()))
-	AsPathType:assert(path)
+	assert(AsPathType(path))
 
 	return luneFileSystem.writeDir(asPathToString(path))
 end
