@@ -1,9 +1,5 @@
 # lune-pathfs
-luau-path + @lune/fs and some utilities
-
-## v0.6.0-rc.8
-### Changes
-- Reimplement `pathfs.normalize` and now works properly ([#26](https://github.com/jiwonz/lune-pathfs/pull/26))
+luau-path + @lune/fs with some utilities
 
 ## Features
 - Includes typed `luau-path` utility (now fully typed)
@@ -78,6 +74,7 @@ end)
 - [ffrostfall/lunePackages](https://github.com/ffrostfall/lunePackages/blob/e6335a8c44957afbf1b00e3ecca37ac6a03af14d/watch/init.luau) - watch utilities base implementations
 
 ## TO-DOs
-- [ ] Generate markdown docs from Moonwave comments for pesde docs
+- [ ] Docs
 - [ ] Add utils tests
 - [ ] Write CHANGELOG.md instead writing in README.md (maybe from v0.6.0)
+- [ ] (automated via GitHub action) Release with a bundled module
