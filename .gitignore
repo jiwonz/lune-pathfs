@@ -3,3 +3,4 @@ luau_packages
 lune_packages
 package-lock.json
 node_modules
+build
