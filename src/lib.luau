@@ -97,9 +97,6 @@ pathfs.cwd = cwd
 	```
 ]=]
 pathfs.Path = Path
-pathfs.types = {}
-pathfs.types.Path = PathType
-pathfs.types.AsPath = AsPathType
 
 local function extendTable<K, V>(target: { V }, tbl: { [K]: V })
 	for _, v in tbl do
