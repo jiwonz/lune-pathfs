@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[328],{4410:s=>{s.exports=JSON.parse('{"sourceUrl":"https://github.com/jiwonz/lune-pathfs/blob/master","baseUrl":"/lune-pathfs/","classOrder":["pathfs"],"apiCategories":[]}')}}]);

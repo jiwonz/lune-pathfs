@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">pathfs | pathfs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://jiwonz.github.io/lune-pathfs/api/pathfs"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="pathfs | pathfs"><meta data-rh="true" name="description" content="luau-path + @lune/fs with some utilities"><meta data-rh="true" property="og:description" content="luau-path + @lune/fs with some utilities"><link data-rh="true" rel="canonical" href="https://jiwonz.github.io/lune-pathfs/api/pathfs"><link data-rh="true" rel="alternate" href="https://jiwonz.github.io/lune-pathfs/api/pathfs" hreflang="en"><link data-rh="true" rel="alternate" href="https://jiwonz.github.io/lune-pathfs/api/pathfs" hreflang="x-default"><link rel="stylesheet" href="/lune-pathfs/assets/css/styles.a77765c4.css">
+<script src="/lune-pathfs/assets/js/runtime~main.86d68e8c.js" defer="defer"></script>
+<script src="/lune-pathfs/assets/js/main.d3846fcc.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lune-pathfs/"><b class="navbar__title text--truncate">pathfs</b></a><a class="navbar__item navbar__link" href="/lune-pathfs/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lune-pathfs/api/">API</a><a class="navbar__item navbar__link" href="/lune-pathfs/changelog">Changelog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/jiwonz/lune-pathfs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/lune-pathfs/api/pathfs">pathfs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/DirectoryPath">​Directory​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/FilePath">​File​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/fs">fs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/Path">​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/vfs">vfs</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">pathfs</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>luau-path + @lune/fs with some utilities</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a href="#types" class="hash-link" aria-label="Direct link to Types" title="Direct link to Types">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="DirEntry"><code style="text-decoration:none">DirEntry</code><a href="#DirEntry" class="hash-link" aria-label="Direct link to DirEntry" title="Direct link to DirEntry">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L362"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>DirEntry<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>name<!-- -->: </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>File name of this directory entry without any leading path component(s)</p>
+</span></span></div><div><code>file<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/FilePath">FilePath?</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>File object if it exists</p>
+</span></span></div><div><code>dir<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/DirectoryPath">DirectoryPath?</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Directory object if it exists</p>
+</span></span></div><div><code>path<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/Path">Path</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The full path of this directory entry</p>
+</span></span></div></div><code>}</code></div><div>
+<p>A directory entry object.</p>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fs"><code style="text-decoration:none">fs</code><a href="#fs" class="hash-link" aria-label="Direct link to fs" title="Direct link to fs">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L45"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->fs<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/fs">fs</a></code></div><div></div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="DirectoryPath"><code style="text-decoration:none">DirectoryPath</code><a href="#DirectoryPath" class="hash-link" aria-label="Direct link to DirectoryPath" title="Direct link to DirectoryPath">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L50"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->DirectoryPath<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/DirectoryPath">DirectoryPath</a></code></div><div></div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="FilePath"><code style="text-decoration:none">FilePath</code><a href="#FilePath" class="hash-link" aria-label="Direct link to FilePath" title="Direct link to FilePath">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L55"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->FilePath<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/FilePath">FilePath</a></code></div><div></div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="pathSeparator"><code style="text-decoration:none">pathSeparator</code><a href="#pathSeparator" class="hash-link" aria-label="Direct link to pathSeparator" title="Direct link to pathSeparator">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L71"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->pathSeparator<!-- -->:<!-- --> </code> <code class="blue_P4bS">string</code></div><div>
+<p>Current path separator</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">if</span> process<span class="token punctuation">.</span>os <span class="token operator">==</span> <span class="token string">"windows"</span> <span class="token keyword">then</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>pathfs<span class="token punctuation">.</span>pathSeparator<span class="token punctuation">)</span> <span class="token comment">-- "\\" (Windows)</span>
+<span class="token keyword">else</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>pathfs<span class="token punctuation">.</span>pathSeparator<span class="token punctuation">)</span> <span class="token comment">-- "/" (other OS, maybe Linux)</span>
+<span class="token keyword">end</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Component"><code style="text-decoration:none">Component</code><a href="#Component" class="hash-link" aria-label="Direct link to Component" title="Direct link to Component">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L79"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->Component<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://github.com/seaofvoices/luau-path/blob/main/src/Component.luau" target="_blank" rel="noopener noreferrer">Component<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>A <code>Component</code> class exported from <code>luau-path</code></p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Path"><code style="text-decoration:none">Path</code><a href="#Path" class="hash-link" aria-label="Direct link to Path" title="Direct link to Path">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L99"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.<!-- -->Path<!-- -->:<!-- --> </code> <code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/Path">Path</a></code></div><div>
+<p>A <code>Path</code> class exported from <code>luau-path</code></p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> path <span class="token operator">=</span> Path<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="cwd"><code style="text-decoration:none">cwd</code><a href="#cwd" class="hash-link" aria-label="Direct link to cwd" title="Direct link to cwd">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/vfs.luau#L64"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">cwd</code><code>(</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/Path">Path</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The current working directory</p>
+</span></span></div><div>
+<p>Returns the current working directory as an absolute path.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="normalize"><code style="text-decoration:none">normalize</code><a href="#normalize" class="hash-link" aria-label="Direct link to normalize" title="Direct link to normalize">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/normalizePath.luau#L74"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">normalize</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/Path#AsPath">AsPath</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to normalize</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/Path">Path</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The normalized path</p>
+</span></span></div><div>
+<p>Normalizes paths similarly to canonicalize, but without performing I/O.</p>
+<p>This is like Python's <code>os.path.normpath</code>.</p>
+<p><em>Original implementation/source credit goes to <a href="https://docs.rs/normalize-path/0.2.1/src/normalize_path/lib.rs.html#30">normalize-path</a>.</em></p>
+<p>Normalize a path without performing I/O.</p>
+<p>All redundant separator and up-level references are collapsed.</p>
+<p>However, this does not resolve links.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> path <span class="token operator">=</span> pathfs<span class="token punctuation">.</span><span class="token function">normalize</span><span class="token punctuation">(</span><span class="token string">"./path/to/./file"</span><span class="token punctuation">)</span> <span class="token comment">-- "path/to/file"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="script"><code style="text-decoration:none">script</code><a href="#script" class="hash-link" aria-label="Direct link to script" title="Direct link to script">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L117"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">script</code><code>(</code><code>level<!-- -->: </code><code class="blue_P4bS">typeof(optionalNumberType:type())</code><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Gets current script context's path. (default level is <code>2</code>)</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>script path found in <code>debug.info(level)</code> is not resolvable.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="absolute"><code style="text-decoration:none">absolute</code><a href="#absolute" class="hash-link" aria-label="Direct link to absolute" title="Direct link to absolute">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L142"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">absolute</code><code>(</code><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Gets absolute path of given path just by joining the <code>pathfs.cwd</code> and the path.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="withoutCurDir"><code style="text-decoration:none">withoutCurDir</code><a href="#withoutCurDir" class="hash-link" aria-label="Direct link to withoutCurDir" title="Direct link to withoutCurDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L160"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">withoutCurDir</code><code>(</code><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Gets a path without the current directory component.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="diff"><code style="text-decoration:none">diff</code><a href="#diff" class="hash-link" aria-label="Direct link to diff" title="Direct link to diff">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L183"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">diff</code><code>(</code><div class="inset_uKQm"><div><code>target<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code></div><div><code>base<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code></div><div><code>separator<!-- -->: </code><code class="blue_P4bS">typeof(optionalStringType:type())</code></div></div><code>) → </code><code class="blue_P4bS">typeof(optionalPathType:type())</code></div><div>
+<p>Construct a relative path from a provided base directory path to the provided path.</p>
+<p>Implementation inspired by <a href="https://github.com/Manishearth/pathdiff">https://github.com/Manishearth/pathdiff</a></p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="canonicalize"><code style="text-decoration:none">canonicalize</code><a href="#canonicalize" class="hash-link" aria-label="Direct link to canonicalize" title="Direct link to canonicalize">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L246"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">canonicalize</code><code>(</code><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Returns the canonical, absolute form of a path with all intermediate components normalized and symbolic links resolved.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fromDir"><code style="text-decoration:none">fromDir</code><a href="#fromDir" class="hash-link" aria-label="Direct link to fromDir" title="Direct link to fromDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L269"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">fromDir</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code></div><div><code>relative<!-- -->: </code><code class="blue_P4bS">typeof(optionalBooleanType:type())</code></div></div><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Creates a new <code>Path</code> based on the current dir path.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>Errors while calling <code>pathfs.script(3)</code>.</li>
+  <li>Current script path's parent path does not exist.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getDir"><code style="text-decoration:none">getDir</code><a href="#getDir" class="hash-link" aria-label="Direct link to getDir" title="Direct link to getDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L297"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">getDir</code><code>(</code><code>relative<!-- -->: </code><code class="blue_P4bS">typeof(optionalBooleanType:type())</code><code>) → </code><code class="blue_P4bS">typeof(PathType:type())</code></div><div>
+<p>Get the dir path based on the current script context.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>Errors while calling <code>pathfs.getScriptPath()</code>.</li>
+  <li>Current script path's parent path does not exist.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="findFile"><code style="text-decoration:none">findFile</code><a href="#findFile" class="hash-link" aria-label="Direct link to findFile" title="Direct link to findFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L316"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">findFile</code><code>(</code><div class="inset_uKQm"><div><code>filePath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to the file, of type AsPathType.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/FilePath">FilePath?</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A File object if the file exists, otherwise nil.</p>
+</span></span></div><div>
+<p>Finds a file at the given file path.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="findDir"><code style="text-decoration:none">findDir</code><a href="#findDir" class="hash-link" aria-label="Direct link to findDir" title="Direct link to findDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L335"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">findDir</code><code>(</code><div class="inset_uKQm"><div><code>dirPath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to the directory, of type AsPathType.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/DirectoryPath">DirectoryPath?</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A Directory object if the directory exists, otherwise nil.</p>
+</span></span></div><div>
+<p>Finds a directory at the given directory path.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getEntries"><code style="text-decoration:none">getEntries</code><a href="#getEntries" class="hash-link" aria-label="Direct link to getEntries" title="Direct link to getEntries">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L402"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">getEntries</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to get entries from, of type Directory or AsPathType.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>A table containing the entries in the directory.</p>
+</span></span></div><div>
+<p>Get the entries of a directory.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">for</span> _<span class="token punctuation">,</span> entry <span class="token keyword">in</span> pathfs<span class="token punctuation">.</span><span class="token function">getEntries</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">-- File name of this directory entry without any leading path component(s)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>file<span class="token punctuation">)</span> <span class="token comment">-- File object if it exists</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>directory<span class="token punctuation">)</span> <span class="token comment">-- Directory object if it exists</span>
+<span class="token keyword">end</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getDescendantEntries"><code style="text-decoration:none">getDescendantEntries</code><a href="#getDescendantEntries" class="hash-link" aria-label="Direct link to getDescendantEntries" title="Direct link to getDescendantEntries">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L439"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">getDescendantEntries</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to get entries from, of type Directory or AsPathType.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>A table containing the entries in the directory.</p>
+</span></span></div><div>
+<p>Get the entries of a directory.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">for</span> _<span class="token punctuation">,</span> entry <span class="token keyword">in</span> pathfs<span class="token punctuation">.</span><span class="token function">getDescendantEntries</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">-- File name of this directory entry without any leading path component(s)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>file<span class="token punctuation">)</span> <span class="token comment">-- File object if it exists</span>
+	<span class="token function">print</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span>directory<span class="token punctuation">)</span> <span class="token comment">-- Directory object if it exists</span>
+<span class="token keyword">end</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchDirectories"><code style="text-decoration:none">watchDirectories</code><a href="#watchDirectories" class="hash-link" aria-label="Direct link to watchDirectories" title="Direct link to watchDirectories">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L510"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchDirectories</code><code>(</code><div class="inset_uKQm"><div><code>directories<!-- -->: </code><code class="blue_P4bS">typeof(directoriesArrayType:type())</code><code>,</code></div><div><code>onChanged<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type())</code></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch directories for changes.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchDirectories</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"path/to/dir1"</span><span class="token punctuation">,</span> <span class="token string">"path/to/dir2"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Changed!"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchFile"><code style="text-decoration:none">watchFile</code><a href="#watchFile" class="hash-link" aria-label="Direct link to watchFile" title="Direct link to watchFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L543"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchFile</code><code>(</code><div class="inset_uKQm"><div><code>fileName<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code></div><div><code>onChanged<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type())</code></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch a file for changes.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchFile</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Changed!"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="writeFileAll"><code style="text-decoration:none">writeFileAll</code><a href="#writeFileAll" class="hash-link" aria-label="Direct link to writeFileAll" title="Direct link to writeFileAll">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L766"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">writeFileAll</code><code>(</code><div class="inset_uKQm"><div><code>fileOrPath<!-- -->: </code><code class="blue_P4bS">typeof(FileOrAsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The file or path to write to, of type FilePath or AsPathType.</p>
+</span></span></div><div><code>contents<!-- -->: </code><code class="blue_P4bS">typeof(ContentsType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The contents to write to the file, of type string or table.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Write a file, creating parent directories if they do not exist.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">writeFileAll</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="serializeFile"><code style="text-decoration:none">serializeFile</code><a href="#serializeFile" class="hash-link" aria-label="Direct link to serializeFile" title="Direct link to serializeFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L969"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">serializeFile</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">any</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The value to serialize</p>
+</span></span></div><div><code>fileOrPath<!-- -->: </code><code class="blue_P4bS">typeof(FileOrAsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The file path or FilePath object</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Serializes a value to a file based on the file extension.
+  Supports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.
+</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> data <span class="token operator">=</span> <span class="token punctuation">{</span> name <span class="token operator">=</span> <span class="token string">"example"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token number">42</span> <span class="token punctuation">}</span>
+pathfs<span class="token punctuation">.</span><span class="token function">serializeFile</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">"config.json"</span><span class="token punctuation">)</span>
+pathfs<span class="token punctuation">.</span><span class="token function">serializeFile</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">"config.toml"</span><span class="token punctuation">)</span>
+pathfs<span class="token punctuation">.</span><span class="token function">serializeFile</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">"config.yaml"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="deserializeFile"><code style="text-decoration:none">deserializeFile</code><a href="#deserializeFile" class="hash-link" aria-label="Direct link to deserializeFile" title="Direct link to deserializeFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L1005"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">deserializeFile</code><code>(</code><div class="inset_uKQm"><div><code>fileOrPath<!-- -->: </code><code class="blue_P4bS">typeof(FileOrAsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The file path or FilePath object</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">any</code><span class="inlineDescription_G7Er">-- <span>
+<p>The deserialized value</p>
+</span></span></div><div>
+<p>
+  Deserializes a file based on the file extension.
+  Supports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.
+</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> config <span class="token operator">=</span> pathfs<span class="token punctuation">.</span><span class="token function">deserializeFile</span><span class="token punctuation">(</span><span class="token string">"config.json"</span><span class="token punctuation">)</span>
+<span class="token keyword">local</span> settings <span class="token operator">=</span> pathfs<span class="token punctuation">.</span><span class="token function">deserializeFile</span><span class="token punctuation">(</span><span class="token string">"settings.toml"</span><span class="token punctuation">)</span>
+<span class="token keyword">local</span> data <span class="token operator">=</span> pathfs<span class="token punctuation">.</span><span class="token function">deserializeFile</span><span class="token punctuation">(</span><span class="token string">"data.yaml"</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchEntryAdded"><code style="text-decoration:line-through">watchEntryAdded</code><a href="#watchEntryAdded" class="hash-link" aria-label="Direct link to watchEntryAdded" title="Direct link to watchEntryAdded">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L618"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchEntryAdded</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to watch, of type Directory or AsPathType.</p>
+</span></span></div><div><code>onAdded<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>addedEntry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2">  → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="blue_P4bS">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is added.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch a directory for added entries.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchEntryAdded</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>addedEntry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Added entry:"</span><span class="token punctuation">,</span> addedEntry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchDescendantEntryAdded"><code style="text-decoration:line-through">watchDescendantEntryAdded</code><a href="#watchDescendantEntryAdded" class="hash-link" aria-label="Direct link to watchDescendantEntryAdded" title="Direct link to watchDescendantEntryAdded">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L644"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchDescendantEntryAdded</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to watch, of type Directory or AsPathType.</p>
+</span></span></div><div><code>onAdded<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>addedEntry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="blue_P4bS">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is added.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch a directory for added descendant entries.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchDescendantEntryAdded</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>addedEntry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Added entry:"</span><span class="token punctuation">,</span> addedEntry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchEntryRemoved"><code style="text-decoration:line-through">watchEntryRemoved</code><a href="#watchEntryRemoved" class="hash-link" aria-label="Direct link to watchEntryRemoved" title="Direct link to watchEntryRemoved">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L708"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchEntryRemoved</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to watch, of type Directory or AsPathType.</p>
+</span></span></div><div><code>onRemoved<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>removedEntry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="blue_P4bS">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is removed.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch a directory for removed entries.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchEntryRemoved</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>removedEntry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Removed entry:"</span><span class="token punctuation">,</span> removedEntry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="watchDescendantEntryRemoved"><code style="text-decoration:line-through">watchDescendantEntryRemoved</code><a href="#watchDescendantEntryRemoved" class="hash-link" aria-label="Direct link to watchDescendantEntryRemoved" title="Direct link to watchDescendantEntryRemoved">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L734"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">watchDescendantEntryRemoved</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to watch, of type Directory or AsPathType.</p>
+</span></span></div><div><code>onRemoved<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>removedEntry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="blue_P4bS">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is removed.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">thread</code></div><div>
+<p>Watch a directory for removed descendant entries.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">watchDescendantEntryRemoved</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>removedEntry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Removed entry:"</span><span class="token punctuation">,</span> removedEntry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="observeEntry"><code style="text-decoration:line-through">observeEntry</code><a href="#observeEntry" class="hash-link" aria-label="Direct link to observeEntry" title="Direct link to observeEntry">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L912"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">observeEntry</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to observe, of type Directory or AsPathType.</p>
+</span></span></div><div><code>callback<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>entry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is added or removed.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code></div><div>
+<p>Observe a directory for changes.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">observeEntry</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>entry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Entry changed:"</span><span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+	<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Entry cleanup:"</span><span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+	<span class="token keyword">end</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="observeDescendantEntry"><code style="text-decoration:line-through">observeDescendantEntry</code><a href="#observeDescendantEntry" class="hash-link" aria-label="Direct link to observeDescendantEntry" title="Direct link to observeDescendantEntry">​</a></h3><div class="repositoryDetailsContainer_BPdw"><span class="releaseVersion_EonW">deprecated in <!-- -->unreleased</span><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/lib.luau#L942"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="admonition admonition-caution alert alert--warning"><div class="admonition-heading"><h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span><span class="admonition-title">This was deprecated in unreleased</span></h5></div><div class="admonition-content">This item is deprecated. Do not use it for new work. </div></div><div class="memberString_GwaU"><code>pathfs<!-- -->.</code><code class="green_DgR4">observeDescendantEntry</code><code>(</code><div class="inset_uKQm"><div><code>directory<!-- -->: </code><code class="blue_P4bS">typeof(directoryType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to observe, of type Directory or AsPathType.</p>
+</span></span></div><div><code>callback<!-- -->: </code><code class="blue_P4bS">typeof(callbackType:type()</code><code>:<!-- -->: </code><code class="purple_ieR2">(</code><code>entry<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/lune-pathfs/api/pathfs#DirEntry">DirEntry</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The callback function to call when an entry is added or removed.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code></div><div>
+<p>Observe a directory for changes in its descendants.</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua">pathfs<span class="token punctuation">.</span><span class="token function">observeDescendantEntry</span><span class="token punctuation">(</span><span class="token string">"path/to/dir"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>entry<span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Descendant entry changed:"</span><span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+	<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Cleanup for entry:"</span><span class="token punctuation">,</span> entry<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+	<span class="token keyword">end</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;cwd&quot;,
+            &quot;desc&quot;: &quot;Returns the current working directory as an absolute path.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The current working directory&quot;,
+                    &quot;lua_type&quot;: &quot;Path&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 64,
+                &quot;path&quot;: &quot;src/vfs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;normalize&quot;,
+            &quot;desc&quot;: &quot;Normalizes paths similarly to canonicalize, but without performing I/O.\n\nThis is like Python&#x27;s `os.path.normpath`.\n\n*Original implementation/source credit goes to [normalize-path](https://docs.rs/normalize-path/0.2.1/src/normalize_path/lib.rs.html#30).*\n\nNormalize a path without performing I/O.\n\nAll redundant separator and up-level references are collapsed.\n\nHowever, this does not resolve links.\n\n### Example\n```lua\nlocal path = pathfs.normalize(\&quot;./path/to/./file\&quot;) -- \&quot;path/to/file\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The path to normalize&quot;,
+                    &quot;lua_type&quot;: &quot;AsPath&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The normalized path&quot;,
+                    &quot;lua_type&quot;: &quot;Path&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 74,
+                &quot;path&quot;: &quot;src/normalizePath.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;script&quot;,
+            &quot;desc&quot;: &quot;Gets current script context&#x27;s path. (default level is `2`)\n\nAn error will be thrown in the following situations:\n\n* script path found in `debug.info(level)` is not resolvable.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;level&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(optionalNumberType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 117,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;absolute&quot;,
+            &quot;desc&quot;: &quot;Gets absolute path of given path just by joining the `pathfs.cwd` and the path.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 142,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;withoutCurDir&quot;,
+            &quot;desc&quot;: &quot;Gets a path without the current directory component.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 160,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;diff&quot;,
+            &quot;desc&quot;: &quot;Construct a relative path from a provided base directory path to the provided path.\n\nImplementation inspired by https://github.com/Manishearth/pathdiff&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;base&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;separator&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(optionalStringType:type())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(optionalPathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 183,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;canonicalize&quot;,
+            &quot;desc&quot;: &quot;Returns the canonical, absolute form of a path with all intermediate components normalized and symbolic links resolved.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 246,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;fromDir&quot;,
+            &quot;desc&quot;: &quot;Creates a new `Path` based on the current dir path.\n\nAn error will be thrown in the following situations:\n\n* Errors while calling `pathfs.script(3)`.\n* Current script path&#x27;s parent path does not exist.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;relative&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(optionalBooleanType:type())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 269,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getDir&quot;,
+            &quot;desc&quot;: &quot;Get the dir path based on the current script context.\n\nAn error will be thrown in the following situations:\n\n* Errors while calling `pathfs.getScriptPath()`.\n* Current script path&#x27;s parent path does not exist.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;relative&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(optionalBooleanType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(PathType:type())\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 297,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;findFile&quot;,
+            &quot;desc&quot;: &quot;Finds a file at the given file path.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;filePath&quot;,
+                    &quot;desc&quot;: &quot;The path to the file, of type AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A File object if the file exists, otherwise nil.&quot;,
+                    &quot;lua_type&quot;: &quot;FilePath?&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 316,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;findDir&quot;,
+            &quot;desc&quot;: &quot;Finds a directory at the given directory path.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;dirPath&quot;,
+                    &quot;desc&quot;: &quot;The path to the directory, of type AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A Directory object if the directory exists, otherwise nil.&quot;,
+                    &quot;lua_type&quot;: &quot;DirectoryPath?&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 335,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getEntries&quot;,
+            &quot;desc&quot;: &quot;Get the entries of a directory.\n\n### Example\n```lua\nfor _, entry in pathfs.getEntries(\&quot;path/to/dir\&quot;) do\n\tprint(entry.name) -- File name of this directory entry without any leading path component(s)\n\tprint(entry.file) -- File object if it exists\n\tprint(entry.directory) -- Directory object if it exists\nend\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to get entries from, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A table containing the entries in the directory.&quot;,
+                    &quot;lua_type&quot;: &quot;{ DirEntry }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 402,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getDescendantEntries&quot;,
+            &quot;desc&quot;: &quot;Get the entries of a directory.\n\n### Example\n```lua\nfor _, entry in pathfs.getDescendantEntries(\&quot;path/to/dir\&quot;) do\n\tprint(entry.name) -- File name of this directory entry without any leading path component(s)\n\tprint(entry.file) -- File object if it exists\n\tprint(entry.directory) -- Directory object if it exists\nend\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to get entries from, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A table containing the entries in the directory.&quot;,
+                    &quot;lua_type&quot;: &quot;{ DirEntry }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 439,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchDirectories&quot;,
+            &quot;desc&quot;: &quot;Watch directories for changes.\n\n### Example\n```lua\npathfs.watchDirectories({\&quot;path/to/dir1\&quot;, \&quot;path/to/dir2\&quot;}, function()\n\tprint(\&quot;Changed!\&quot;)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directories&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoriesArrayType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onChanged&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 510,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchFile&quot;,
+            &quot;desc&quot;: &quot;Watch a file for changes.\n\n### Example\n```lua\npathfs.watchFile(\&quot;path/to/file\&quot;, function()\n\tprint(\&quot;Changed!\&quot;)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;fileName&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onChanged&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 543,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchEntryAdded&quot;,
+            &quot;desc&quot;: &quot;Watch a directory for added entries.\n\n### Example\n```lua\npathfs.watchEntryAdded(\&quot;path/to/dir\&quot;, function(addedEntry)\n\tprint(\&quot;Added entry:\&quot;, addedEntry.name)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to watch, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onAdded&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is added.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (addedEntry: DirEntry) -&gt; ())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 618,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchDescendantEntryAdded&quot;,
+            &quot;desc&quot;: &quot;Watch a directory for added descendant entries.\n\n### Example\n```lua\npathfs.watchDescendantEntryAdded(\&quot;path/to/dir\&quot;, function(addedEntry)\n\tprint(\&quot;Added entry:\&quot;, addedEntry.name)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to watch, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onAdded&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is added.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (addedEntry: DirEntry) -&gt; ())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 644,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchEntryRemoved&quot;,
+            &quot;desc&quot;: &quot;Watch a directory for removed entries.\n\n### Example\n```lua\npathfs.watchEntryRemoved(\&quot;path/to/dir\&quot;, function(removedEntry)\n\tprint(\&quot;Removed entry:\&quot;, removedEntry.name)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to watch, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onRemoved&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is removed.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (removedEntry: DirEntry) -&gt; ())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 708,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;watchDescendantEntryRemoved&quot;,
+            &quot;desc&quot;: &quot;Watch a directory for removed descendant entries.\n\n### Example\n```lua\npathfs.watchDescendantEntryRemoved(\&quot;path/to/dir\&quot;, function(removedEntry)\n\tprint(\&quot;Removed entry:\&quot;, removedEntry.name)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to watch, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onRemoved&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is removed.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (removedEntry: DirEntry) -&gt; ())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;thread\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 734,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;writeFileAll&quot;,
+            &quot;desc&quot;: &quot;Write a file, creating parent directories if they do not exist.\n\n### Example\n```lua\npathfs.writeFileAll(\&quot;path/to/file\&quot;, \&quot;content\&quot;)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;fileOrPath&quot;,
+                    &quot;desc&quot;: &quot;The file or path to write to, of type FilePath or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(FileOrAsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;contents&quot;,
+                    &quot;desc&quot;: &quot;The contents to write to the file, of type string or table.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(ContentsType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 766,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;observeEntry&quot;,
+            &quot;desc&quot;: &quot;Observe a directory for changes.\n\n### Example\n```lua\npathfs.observeEntry(\&quot;path/to/dir\&quot;, function(entry)\n\tprint(\&quot;Entry changed:\&quot;, entry.name)\n\n\treturn function()\n\t\tprint(\&quot;Entry cleanup:\&quot;, entry.name)\n\tend\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to observe, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;callback&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is added or removed.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (entry: DirEntry) -&gt; (() -&gt; ())?)\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;() -&gt; ()\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 912,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;observeDescendantEntry&quot;,
+            &quot;desc&quot;: &quot;Observe a directory for changes in its descendants.\n\n### Example\n```lua\npathfs.observeDescendantEntry(\&quot;path/to/dir\&quot;, function(entry)\n\tprint(\&quot;Descendant entry changed:\&quot;, entry.name)\n\n\treturn function()\n\t\tprint(\&quot;Cleanup for entry:\&quot;, entry.name)\n\tend\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;directory&quot;,
+                    &quot;desc&quot;: &quot;The directory to observe, of type Directory or AsPathType.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(directoryType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;callback&quot;,
+                    &quot;desc&quot;: &quot;The callback function to call when an entry is added or removed.&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(callbackType:type() :: (entry: DirEntry) -&gt; (() -&gt; ())?)\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;() -&gt; ()\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;deprecated&quot;: {
+                &quot;version&quot;: &quot;unreleased&quot;,
+                &quot;desc&quot;: null
+            },
+            &quot;source&quot;: {
+                &quot;line&quot;: 942,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;serializeFile&quot;,
+            &quot;desc&quot;: &quot;Serializes a value to a file based on the file extension.\nSupports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.\n\n### Example\n```lua\nlocal data = { name = \&quot;example\&quot;, value = 42 }\npathfs.serializeFile(data, \&quot;config.json\&quot;)\npathfs.serializeFile(data, \&quot;config.toml\&quot;)\npathfs.serializeFile(data, \&quot;config.yaml\&quot;)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The value to serialize&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;fileOrPath&quot;,
+                    &quot;desc&quot;: &quot;The file path or FilePath object&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(FileOrAsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 969,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;deserializeFile&quot;,
+            &quot;desc&quot;: &quot;Deserializes a file based on the file extension.\nSupports JSON (.json), TOML (.toml), and YAML (.yaml, .yml) formats.\n\n### Example\n```lua\nlocal config = pathfs.deserializeFile(\&quot;config.json\&quot;)\nlocal settings = pathfs.deserializeFile(\&quot;settings.toml\&quot;)\nlocal data = pathfs.deserializeFile(\&quot;data.yaml\&quot;)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;fileOrPath&quot;,
+                    &quot;desc&quot;: &quot;The file path or FilePath object&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(FileOrAsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The deserialized value&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 1005,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;fs&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;lua_type&quot;: &quot;fs&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 45,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;DirectoryPath&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;lua_type&quot;: &quot;DirectoryPath&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 50,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;FilePath&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;lua_type&quot;: &quot;FilePath&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 55,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;pathSeparator&quot;,
+            &quot;desc&quot;: &quot;Current path separator\n\n### Example\n```lua\nif process.os == \&quot;windows\&quot; then\n\tprint(pathfs.pathSeparator) -- \&quot;\\\\\&quot; (Windows)\nelse\n\tprint(pathfs.pathSeparator) -- \&quot;/\&quot; (other OS, maybe Linux)\nend\n```&quot;,
+            &quot;lua_type&quot;: &quot;string&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 71,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Component&quot;,
+            &quot;desc&quot;: &quot;A `Component` class exported from `luau-path`&quot;,
+            &quot;lua_type&quot;: &quot;Component&quot;,
+            &quot;external_types&quot;: [
+                {
+                    &quot;name&quot;: &quot;Component&quot;,
+                    &quot;url&quot;: &quot;https://github.com/seaofvoices/luau-path/blob/main/src/Component.luau&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 79,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Path&quot;,
+            &quot;desc&quot;: &quot;A `Path` class exported from `luau-path`\n\n### Example\n```lua\nlocal path = Path.from(\&quot;path/to/file\&quot;)\n```&quot;,
+            &quot;lua_type&quot;: &quot;Path&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 99,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        }
+    ],
+    &quot;types&quot;: [
+        {
+            &quot;name&quot;: &quot;DirEntry&quot;,
+            &quot;desc&quot;: &quot;A directory entry object.&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;name&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;,
+                    &quot;desc&quot;: &quot;File name of this directory entry without any leading path component(s)&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;file&quot;,
+                    &quot;lua_type&quot;: &quot;FilePath?&quot;,
+                    &quot;desc&quot;: &quot;File object if it exists&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;dir&quot;,
+                    &quot;lua_type&quot;: &quot;DirectoryPath?&quot;,
+                    &quot;desc&quot;: &quot;Directory object if it exists&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;lua_type&quot;: &quot;Path&quot;,
+                    &quot;desc&quot;: &quot;The full path of this directory entry&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 362,
+                &quot;path&quot;: &quot;src/lib.luau&quot;
+            }
+        }
+    ],
+    &quot;name&quot;: &quot;pathfs&quot;,
+    &quot;desc&quot;: &quot;luau-path + @lune/fs with some utilities&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 40,
+        &quot;path&quot;: &quot;src/lib.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#DirEntry" class="table-of-contents__link toc-highlight">DirEntry</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#Component" class="table-of-contents__link toc-highlight">Component</a></li><li><a href="#DirectoryPath" class="table-of-contents__link toc-highlight">DirectoryPath</a></li><li><a href="#FilePath" class="table-of-contents__link toc-highlight">FilePath</a></li><li><a href="#fs" class="table-of-contents__link toc-highlight">fs</a></li><li><a href="#Path" class="table-of-contents__link toc-highlight">Path</a></li><li><a href="#pathSeparator" class="table-of-contents__link toc-highlight">pathSeparator</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#absolute" class="table-of-contents__link toc-highlight">.absolute</a></li><li><a href="#canonicalize" class="table-of-contents__link toc-highlight">.canonicalize</a></li><li><a href="#cwd" class="table-of-contents__link toc-highlight">.cwd</a></li><li><a href="#deserializeFile" class="table-of-contents__link toc-highlight">.deserializeFile</a></li><li><a href="#diff" class="table-of-contents__link toc-highlight">.diff</a></li><li><a href="#findDir" class="table-of-contents__link toc-highlight">.findDir</a></li><li><a href="#findFile" class="table-of-contents__link toc-highlight">.findFile</a></li><li><a href="#fromDir" class="table-of-contents__link toc-highlight">.fromDir</a></li><li><a href="#getDescendantEntries" class="table-of-contents__link toc-highlight">.getDescendantEntries</a></li><li><a href="#getDir" class="table-of-contents__link toc-highlight">.getDir</a></li><li><a href="#getEntries" class="table-of-contents__link toc-highlight">.getEntries</a></li><li><a href="#normalize" class="table-of-contents__link toc-highlight">.normalize</a></li><li><a href="#observeDescendantEntry" class="table-of-contents__link toc-highlight">.observeDescendantEntry</a></li><li><a href="#observeEntry" class="table-of-contents__link toc-highlight">.observeEntry</a></li><li><a href="#script" class="table-of-contents__link toc-highlight">.script</a></li><li><a href="#serializeFile" class="table-of-contents__link toc-highlight">.serializeFile</a></li><li><a href="#watchDescendantEntryAdded" class="table-of-contents__link toc-highlight">.watchDescendantEntryAdded</a></li><li><a href="#watchDescendantEntryRemoved" class="table-of-contents__link toc-highlight">.watchDescendantEntryRemoved</a></li><li><a href="#watchDirectories" class="table-of-contents__link toc-highlight">.watchDirectories</a></li><li><a href="#watchEntryAdded" class="table-of-contents__link toc-highlight">.watchEntryAdded</a></li><li><a href="#watchEntryRemoved" class="table-of-contents__link toc-highlight">.watchEntryRemoved</a></li><li><a href="#watchFile" class="table-of-contents__link toc-highlight">.watchFile</a></li><li><a href="#withoutCurDir" class="table-of-contents__link toc-highlight">.withoutCurDir</a></li><li><a href="#writeFileAll" class="table-of-contents__link toc-highlight">.writeFileAll</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 jiwonz. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

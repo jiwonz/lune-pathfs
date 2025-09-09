@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">fs | pathfs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://jiwonz.github.io/lune-pathfs/api/fs"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="fs | pathfs"><meta data-rh="true" name="description" content="`require(&quot;@lune/fs&quot;)` compat module
+
+### Example
+```lua
+local fs = require(&quot;path/to/pathfs&quot;).fs
+
+fs.readFile(&quot;path/to/file&quot;)
+fs.writeFile(&quot;path/to/file&quot;, &quot;content&quot;)
+```"><meta data-rh="true" property="og:description" content="`require(&quot;@lune/fs&quot;)` compat module
+
+### Example
+```lua
+local fs = require(&quot;path/to/pathfs&quot;).fs
+
+fs.readFile(&quot;path/to/file&quot;)
+fs.writeFile(&quot;path/to/file&quot;, &quot;content&quot;)
+```"><link data-rh="true" rel="canonical" href="https://jiwonz.github.io/lune-pathfs/api/fs"><link data-rh="true" rel="alternate" href="https://jiwonz.github.io/lune-pathfs/api/fs" hreflang="en"><link data-rh="true" rel="alternate" href="https://jiwonz.github.io/lune-pathfs/api/fs" hreflang="x-default"><link rel="stylesheet" href="/lune-pathfs/assets/css/styles.a77765c4.css">
+<script src="/lune-pathfs/assets/js/runtime~main.86d68e8c.js" defer="defer"></script>
+<script src="/lune-pathfs/assets/js/main.d3846fcc.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/lune-pathfs/"><b class="navbar__title text--truncate">pathfs</b></a><a class="navbar__item navbar__link" href="/lune-pathfs/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/lune-pathfs/api/">API</a><a class="navbar__item navbar__link" href="/lune-pathfs/changelog">Changelog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/jiwonz/lune-pathfs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/pathfs">pathfs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/DirectoryPath">​Directory​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/FilePath">​File​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/lune-pathfs/api/fs">fs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/Path">​Path</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/lune-pathfs/api/vfs">vfs</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">fs</span></h1><div class="luaClassTags_EipM"></div><div>
+<p><code>require("@lune/fs")</code> compat module</p>
+<h3>Example</h3>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path/to/pathfs"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fs
+
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">)</span>
+fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">)</span>
+</code></pre>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="copy"><code style="text-decoration:none">copy</code><a href="#copy" class="hash-link" aria-label="Direct link to copy" title="Direct link to copy">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L47"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">copy</code><code>(</code><div class="inset_uKQm"><div><code>from<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to copy from</p>
+</span></span></div><div><code>to<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to copy to</p>
+</span></span></div><div><code>overwriteOrOptions<!-- -->: </code><code class="blue_P4bS">typeof(overwriteOrOptionsType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>Options for the target path, such as if should be overwritten if it already exists</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Copies a file or directory recursively to a new path.</p>
+<p>
+  Throws an error if a file or directory already exists at the target path.
+  This can be bypassed by passing <code>true</code> as the third argument, or a dictionary of options.
+  Refer to the documentation for <code>WriteOptions</code> for specific option keys and their values.
+</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The current process lacks permissions to read at <code>from</code> or write at <code>to</code>.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="isDir"><code style="text-decoration:none">isDir</code><a href="#isDir" class="hash-link" aria-label="Direct link to isDir" title="Direct link to isDir">​</a></h3><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">must_use</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L73"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">isDir</code><code>(</code><div class="inset_uKQm"><div><code>dirPath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory path to check</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>If the path is a directory or not</p>
+</span></span></div><div>
+<p>Checks if a given path is a directory.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The current process lacks permissions to read at <code>path</code>.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="isFile"><code style="text-decoration:none">isFile</code><a href="#isFile" class="hash-link" aria-label="Direct link to isFile" title="Direct link to isFile">​</a></h3><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">must_use</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L93"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">isFile</code><code>(</code><div class="inset_uKQm"><div><code>filePath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The file path to check</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>If the path is a file or not</p>
+</span></span></div><div>
+<p>Checks if a given path is a file.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The current process lacks permissions to read at <code>path</code>.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="metadata"><code style="text-decoration:none">metadata</code><a href="#metadata" class="hash-link" aria-label="Direct link to metadata" title="Direct link to metadata">​</a></h3><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">must_use</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L113"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">metadata</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to get metadata for</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">Metadata</code><span class="inlineDescription_G7Er">-- <span>
+<p>Metadata for the path</p>
+</span></span></div><div>
+<p>Gets metadata for the given path.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The current process lacks permissions to read at <code>path</code>.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="move"><code style="text-decoration:none">move</code><a href="#move" class="hash-link" aria-label="Direct link to move" title="Direct link to move">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L138"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">move</code><code>(</code><div class="inset_uKQm"><div><code>from<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to move from</p>
+</span></span></div><div><code>to<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to move to</p>
+</span></span></div><div><code>overwriteOrOptions<!-- -->: </code><code class="blue_P4bS">typeof(overwriteOrOptionsType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>Options for the target path, such as if should be overwritten if it already exists</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Moves a file or directory to a new path.</p>
+<p>
+  Throws an error if a file or directory already exists at the target path.
+  This can be bypassed by passing <code>true</code> as the third argument, or a dictionary of options.
+  Refer to the documentation for <code>WriteOptions</code> for specific option keys and their values.
+</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The current process lacks permissions to read at <code>from</code> or write at <code>to</code>.</li>
+  <li>The new path exists on a different mount point.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="readDir"><code style="text-decoration:none">readDir</code><a href="#readDir" class="hash-link" aria-label="Direct link to readDir" title="Direct link to readDir">​</a></h3><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">must_use</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L165"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">readDir</code><code>(</code><div class="inset_uKQm"><div><code>dirPath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory path to search in</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">string</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>A list of files &#x26; directories found</p>
+</span></span></div><div>
+<p>Reads entries in a directory at <code>path</code>.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li><code>path</code> does not point to an existing directory.</li>
+  <li>The current process lacks permissions to read the contents of the directory.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="readFile"><code style="text-decoration:none">readFile</code><a href="#readFile" class="hash-link" aria-label="Direct link to readFile" title="Direct link to readFile">​</a></h3><span class="docTag__6UZ" style="border-color:#2b8ab6;color:#2b8ab6">must_use</span><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L186"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">readFile</code><code>(</code><div class="inset_uKQm"><div><code>filePath<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to the file to read</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>The contents of the file</p>
+</span></span></div><div>
+<p>Reads a file at <code>path</code>.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li><code>path</code> does not point to an existing file.</li>
+  <li>The current process lacks permissions to read the file.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="removeDir"><code style="text-decoration:none">removeDir</code><a href="#removeDir" class="hash-link" aria-label="Direct link to removeDir" title="Direct link to removeDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L205"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">removeDir</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to remove</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Removes a directory and all of its contents.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li><code>path</code> is not an existing and empty directory.</li>
+  <li>The current process lacks permissions to remove the directory.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="removeFile"><code style="text-decoration:none">removeFile</code><a href="#removeFile" class="hash-link" aria-label="Direct link to removeFile" title="Direct link to removeFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L224"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">removeFile</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The file to remove</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Removes a file.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li><code>path</code> does not point to an existing file.</li>
+  <li>The current process lacks permissions to remove the file.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="writeFile"><code style="text-decoration:none">writeFile</code><a href="#writeFile" class="hash-link" aria-label="Direct link to writeFile" title="Direct link to writeFile">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L244"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">writeFile</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path of the file</p>
+</span></span></div><div><code>contents<!-- -->: </code><code class="blue_P4bS">typeof(ContentsType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The contents of the file</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes to a file at <code>path</code>.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li>The file's parent directory does not exist.</li>
+  <li>The current process lacks permissions to write to the file.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="writeDir"><code style="text-decoration:none">writeDir</code><a href="#writeDir" class="hash-link" aria-label="Direct link to writeDir" title="Direct link to writeDir">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/jiwonz/lune-pathfs/blob/master/src/fs.luau#L264"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>fs<!-- -->.</code><code class="green_DgR4">writeDir</code><code>(</code><div class="inset_uKQm"><div><code>path<!-- -->: </code><code class="blue_P4bS">typeof(AsPathType:type())</code><span class="inlineDescription_G7Er">-- <span>
+<p>The directory to create</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Creates a directory and its parent directories if they are missing.</p>
+<p>An error will be thrown in the following situations:</p>
+<ul>
+  <li><code>path</code> already points to an existing file or directory.</li>
+  <li>The current process lacks permissions to create the directory or its missing parents.</li>
+  <li>Some other I/O error occurred.</li>
+</ul>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;copy&quot;,
+            &quot;desc&quot;: &quot;Copies a file or directory recursively to a new path.\n\nThrows an error if a file or directory already exists at the target path.\nThis can be bypassed by passing `true` as the third argument, or a dictionary of options.\nRefer to the documentation for `WriteOptions` for specific option keys and their values.\n\nAn error will be thrown in the following situations:\n\n* The current process lacks permissions to read at `from` or write at `to`.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;from&quot;,
+                    &quot;desc&quot;: &quot;The path to copy from&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;The path to copy to&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;overwriteOrOptions&quot;,
+                    &quot;desc&quot;: &quot;Options for the target path, such as if should be overwritten if it already exists&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(overwriteOrOptionsType:type())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 47,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;isDir&quot;,
+            &quot;desc&quot;: &quot;Checks if a given path is a directory.\n\nAn error will be thrown in the following situations:\n\n* The current process lacks permissions to read at `path`.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;dirPath&quot;,
+                    &quot;desc&quot;: &quot;The directory path to check&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;If the path is a directory or not&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;tags&quot;: [
+                &quot;must_use&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 73,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;isFile&quot;,
+            &quot;desc&quot;: &quot;Checks if a given path is a file.\n\nAn error will be thrown in the following situations:\n\n* The current process lacks permissions to read at `path`.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;filePath&quot;,
+                    &quot;desc&quot;: &quot;The file path to check&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;If the path is a file or not&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;tags&quot;: [
+                &quot;must_use&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 93,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;metadata&quot;,
+            &quot;desc&quot;: &quot;Gets metadata for the given path.\n\nAn error will be thrown in the following situations:\n\n* The current process lacks permissions to read at `path`.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The path to get metadata for&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;Metadata for the path&quot;,
+                    &quot;lua_type&quot;: &quot;Metadata&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;tags&quot;: [
+                &quot;must_use&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 113,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;move&quot;,
+            &quot;desc&quot;: &quot;Moves a file or directory to a new path.\n\nThrows an error if a file or directory already exists at the target path.\nThis can be bypassed by passing `true` as the third argument, or a dictionary of options.\nRefer to the documentation for `WriteOptions` for specific option keys and their values.\n\nAn error will be thrown in the following situations:\n\n* The current process lacks permissions to read at `from` or write at `to`.\n* The new path exists on a different mount point.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;from&quot;,
+                    &quot;desc&quot;: &quot;The path to move from&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;The path to move to&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;overwriteOrOptions&quot;,
+                    &quot;desc&quot;: &quot;Options for the target path, such as if should be overwritten if it already exists&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(overwriteOrOptionsType:type())\n&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 138,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;readDir&quot;,
+            &quot;desc&quot;: &quot;Reads entries in a directory at `path`.\n\nAn error will be thrown in the following situations:\n\n* `path` does not point to an existing directory.\n* The current process lacks permissions to read the contents of the directory.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;dirPath&quot;,
+                    &quot;desc&quot;: &quot;The directory path to search in&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A list of files &amp; directories found&quot;,
+                    &quot;lua_type&quot;: &quot;{string}&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;tags&quot;: [
+                &quot;must_use&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 165,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;readFile&quot;,
+            &quot;desc&quot;: &quot;Reads a file at `path`.\n\nAn error will be thrown in the following situations:\n\n* `path` does not point to an existing file.\n* The current process lacks permissions to read the file.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;filePath&quot;,
+                    &quot;desc&quot;: &quot;The path to the file to read&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The contents of the file&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;tags&quot;: [
+                &quot;must_use&quot;
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 186,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;removeDir&quot;,
+            &quot;desc&quot;: &quot;Removes a directory and all of its contents.\n\nAn error will be thrown in the following situations:\n\n* `path` is not an existing and empty directory.\n* The current process lacks permissions to remove the directory.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The directory to remove&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 205,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;removeFile&quot;,
+            &quot;desc&quot;: &quot;Removes a file.\n\nAn error will be thrown in the following situations:\n\n* `path` does not point to an existing file.\n* The current process lacks permissions to remove the file.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The file to remove&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 224,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;writeFile&quot;,
+            &quot;desc&quot;: &quot;Writes to a file at `path`.\n\nAn error will be thrown in the following situations:\n\n* The file&#x27;s parent directory does not exist.\n* The current process lacks permissions to write to the file.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The path of the file&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;contents&quot;,
+                    &quot;desc&quot;: &quot;The contents of the file&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(ContentsType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 244,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;writeDir&quot;,
+            &quot;desc&quot;: &quot;Creates a directory and its parent directories if they are missing.\n\nAn error will be thrown in the following situations:\n\n* `path` already points to an existing file or directory.\n* The current process lacks permissions to create the directory or its missing parents.\n* Some other I/O error occurred.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The directory to create&quot;,
+                    &quot;lua_type&quot;: &quot;typeof(AsPathType:type())&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 264,
+                &quot;path&quot;: &quot;src/fs.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;fs&quot;,
+    &quot;desc&quot;: &quot;`require(\&quot;@lune/fs\&quot;)` compat module\n\n### Example\n```lua\nlocal fs = require(\&quot;path/to/pathfs\&quot;).fs\n\nfs.readFile(\&quot;path/to/file\&quot;)\nfs.writeFile(\&quot;path/to/file\&quot;, \&quot;content\&quot;)\n```&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 26,
+        &quot;path&quot;: &quot;src/fs.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#copy" class="table-of-contents__link toc-highlight">.copy</a></li><li><a href="#isDir" class="table-of-contents__link toc-highlight">.isDir</a></li><li><a href="#isFile" class="table-of-contents__link toc-highlight">.isFile</a></li><li><a href="#metadata" class="table-of-contents__link toc-highlight">.metadata</a></li><li><a href="#move" class="table-of-contents__link toc-highlight">.move</a></li><li><a href="#readDir" class="table-of-contents__link toc-highlight">.readDir</a></li><li><a href="#readFile" class="table-of-contents__link toc-highlight">.readFile</a></li><li><a href="#removeDir" class="table-of-contents__link toc-highlight">.removeDir</a></li><li><a href="#removeFile" class="table-of-contents__link toc-highlight">.removeFile</a></li><li><a href="#writeDir" class="table-of-contents__link toc-highlight">.writeDir</a></li><li><a href="#writeFile" class="table-of-contents__link toc-highlight">.writeFile</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 jiwonz. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
