@@ -17,8 +17,7 @@
 - Features useful path and fs related utilities (such as `watchFile`, `Directory`, `diff` and more!)
 
 ## Prerequisites
-- **pesde**: `^0.10.2`
-- **lune**: `^0.7.1`
+- **lune**: `^0.10.2`
 
 ## Installation
 Install via [pesde](https://pesde.dev/packages/jiwonz/pathfs)
@@ -26,39 +25,9 @@ Install via [pesde](https://pesde.dev/packages/jiwonz/pathfs)
 pesde add jiwonz/pathfs -t lune
 ```
 
-## Development Setup
-- [mise](https://github.com/jdx/mise)
-
-## Usage
-```lua
-local pathfs = require("../lune_packages/pathfs")
-local fs = pathfs.fs -- compat with lune's fs lib (@lune/fs)
-
-fs.writeFile("something.json", "{ \"message\": \"Hello, world!\" }")
-
--- Using Path
-local Path = pathfs.Path
-local path = Path.from("something.json")
-
-print(fs.readFile(path))
-
--- Some useful utilities
-pathfs.script()
-pathfs.normalize("./dirty/./path")
-pathfs.absolute("relative/file/path")
-pathfs.withoutCurDir("./to/remove/curdir/the/dot")
-pathfs.diff("target", "base")
-pathfs.findFile("path/to/file")
-pathfs.findDir("path/to/dir")
-pathfs.watchFile("path/to/file", function()
-	print("changed")
-end)
-pathfs.watchDirectories({ "dir1", "dir2" }, function()
-	print("changed")
-end)
-pathfs.writeFileAll("a/b/c/d/lol", "hi")
-
-```
+## Project Requirements
+- [mise](https://github.com/jdx/mise) - Toolchain Manager
+- [pesde](https://github.com/pesde-pkg/pesde) - Package Manager
 
 ## Credits
 - [seaofvoices/luau-path](https://github.com/seaofvoices/luau-path) - The base of this library and cool Path implementation for Luau
