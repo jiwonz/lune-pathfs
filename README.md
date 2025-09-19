@@ -16,11 +16,18 @@
 - Includes runtime type checkers via greentea.
 - Features useful path and fs related utilities (such as `watchFile`, `Directory`, `diff` and more!)
 
+## Prerequisites
+- **pesde**: `^0.10.2`
+- **lune**: `^0.7.1`
+
 ## Installation
 Install via [pesde](https://pesde.dev/packages/jiwonz/pathfs)
 ```sh
 pesde add jiwonz/pathfs -t lune
 ```
+
+## Development Setup
+- [mise](https://github.com/jdx/mise)
 
 ## Usage
 ```lua
