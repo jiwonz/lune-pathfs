@@ -26,4 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve related to GreenTea types ([#35](https://github.com/jiwonz/lune-pathfs/pull/35))
 
 [unreleased]: https://github.com/jiwonz/lune-pathfs/compare/v0.6.0...HEAD
-[0.2.0]: https://github.com/jiwonz/lune-pathfs/releases/tag/v0.6.0
+[0.6.0]: https://github.com/jiwonz/lune-pathfs/releases/tag/v0.6.0
